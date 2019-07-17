@@ -12,10 +12,10 @@ export const getters = {
   }
 }
 
-export const state = {
-  workout: {},
-  workouts: []
-}
+export const state = () => ({
+  workouts: [],
+  workout: {}
+})
 
 export const mutations = {
   setWorkout: (state, workouts) => {
@@ -28,11 +28,17 @@ export const mutations = {
 
 export const actions = {
   async GET_WORKOUTS({ commit }) {
-    const { data } = await axios.get(`workouts`)
-    commit('setWorkout', data)
+    await axios.get(`workouts`)
+      .then(response => response.data)
+      .then((workouts) => {
+        commit('setWorkout', workouts)
+      })
   },
-  async GETWORKOUT({ commit, store }, id) {
-    const { data } = await axios.get(`posts/${id}`)
-    commit('setCurrentWorkout', data)
+  async GETWORKOUT({ commit }, id) {
+    await axios.get(`posts/${id}`)
+      .then(response => response.data)
+      .then((workout) => {
+        commit('setCurrentWorkout', workout)
+      })
   }
 }

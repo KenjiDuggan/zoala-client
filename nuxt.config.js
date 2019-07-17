@@ -59,10 +59,12 @@ module.exports = {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'data.token' },
-          user: { url: 'me', method: 'get', propertyName: 'data' },
+          login: { url: 'login', method: 'post', propertyName: 'token' },
+          user: { url: 'me', method: 'get', propertyName: false },
           logout: false
-        }
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer'
       }
     }
   },

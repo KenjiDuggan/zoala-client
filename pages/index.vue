@@ -1,30 +1,24 @@
 <template>
-  <v-container>
-    <v-layout row wrap>
-      <v-flex tag="h1" class="headline">Main Page</v-flex>
-      <v-flex d-flex xs12 order-xs5>
-        <v-layout column>
-          <v-flex>
-            <v-card flat>
-              <v-card-text>Wow this is the main page</v-card-text>
-            </v-card>
-          </v-flex>
-          <v-flex>
-            <v-card flat>
-              <v-card-text></v-card-text>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-    </v-layout>
-    <Workout />
-  </v-container>
-
+  <div>
+    <h1>Workout posts</h1>
+    <p v-if="$isFetching">Fetching workouts...</p>
+    <ul v-else>
+      <li v-for="workout of workouts" :key="workout.id">
+        <n-link :to="`/workout/${workout.id}`">{{ workout.name }}</n-link>
+      </li>
+    </ul>
+  </div>
 </template>
 <script>
+
 export default {
-  components: {
-    Workout
+  data () {
+    return {
+      workouts: []
+    }
+  },
+  async fetch () {
+    this.workouts = await fetch(`http://localhost:3001/api/workout`).then((res) => res.json())
   }
 }
 </script>

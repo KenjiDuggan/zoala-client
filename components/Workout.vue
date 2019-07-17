@@ -10,27 +10,30 @@
   </ul>
 </template>
 <script>
-import { mapState } from 'vuex'
 
 export default {
   name: {
       Workout
   },
-  mounted () {
-    this.$store.dispatch('GET_WORKOUTS');
+  props: {
+      workoutId: {
+          type: Number,
+          required: true
+      }
+  },
+  data () {
+      return {
+          workout: []
+      }
   },
   computed: {
-    ...mapState([
-        'workouts'
-    ])
-  },
-  methods: {
-    addWorkout (e) {
-      this.$store.commit('addworkout', e.target.value)
-      e.target.value = ''
-    },
 
+  },
+  async fetch() {
+      headers.append('Content-Type',undefined);
+      this.workout = await fetch(`http://localhost:3001/api/workout`, JSON.stringify(workout)).map((res) => res.json())
   }
+
 }
 </script>
 
