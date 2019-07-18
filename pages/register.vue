@@ -109,6 +109,7 @@ export default {
                 accessToken: 'someStringGotFromApiServiceWithAjax'
             },
             })
+            this.$store.dispatch('asyncData');
             this.$store.commit('setAuth', token);
             Cookie.set('auth', token);
             this.$router.push('/');

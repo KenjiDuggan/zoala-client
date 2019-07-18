@@ -23,8 +23,7 @@ export const actions = {
         }
         commit('setAuth', token)
       }
-    }
-
+}
 
 export const getters = {
   isAuthenticated(state) {

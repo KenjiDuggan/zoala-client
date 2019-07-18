@@ -67,6 +67,7 @@ export default {
             accessToken: 'someStringGotFromApiServiceWithAjax'
           },
         })
+         this.$store.dispatch('asyncData');
          this.$store.commit('settoken', token);
          Cookie.set('token', token);
          this.$router.push('/');
