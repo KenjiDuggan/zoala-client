@@ -22,11 +22,12 @@
 </template>
 
 <script>
-import Notifications from '../components/Notifications';
+import Notification from '../components/Notification';
+const Cookie = process.client ? require('js-cookie') : undefined;
 
 export default {
   components: {
-    Notifications
+    Notification
   },
   data () {
       return {
@@ -39,7 +40,8 @@ export default {
           (v) => !!v || 'Password is required',
         ],
         email: '',
-        password: ''
+        password: '',
+        error: null,
       }
     },
   methods: {
@@ -55,20 +57,25 @@ export default {
       this.$refs.form.resetValidation()
     },
     async login() {
-          try{
-            await this.$auth.loginWith('local', {
-              data: {
-                email: this.email,
-                password: this.password
-              }
-            })
-
-            this.$router.push('/');
-          }catch(e){
-            this.error = e.response.data.message
-          }
-        },
+      try {
+        await this.$token.loginWith('local', {
+          data: {
+            email: this.email,
+            password: this.password
+          },
+          token: {
+            accessToken: 'someStringGotFromApiServiceWithAjax'
+          },
+        })
+         this.$store.commit('settoken', token);
+         Cookie.set('token', token);
+         this.$router.push('/');
+      } catch (e) {
+        this.error = e.response.data.message
+        this.$router.push('/register')
+      }
+    },
   },
   middleware: 'guest'
-}
+  }  
 </script>

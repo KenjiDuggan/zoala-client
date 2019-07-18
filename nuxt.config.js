@@ -33,7 +33,7 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [],  
   /*
    ** Plugins to load before mounting the App
    */
@@ -52,6 +52,7 @@ module.exports = {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
+
   axios: {
     baseURL: 'http://localhost:3001/api'
   },
@@ -59,8 +60,9 @@ module.exports = {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'token' },
-          user: { url: 'me', method: 'get', propertyName: false },
+          login: { url: 'login', method: 'post', propertyName: 'data.token' },
+          register: {url: 'register', method: 'post', propertyName: 'data.token'},
+          user: { url: 'workout', method: 'get', propertyName: 'data.workouts' },
           logout: false
         },
         tokenRequired: true,
@@ -85,6 +87,7 @@ module.exports = {
     icons: true,
     iconfont: 'mdi'
   },
+
   /*
    ** Build configuration
    */

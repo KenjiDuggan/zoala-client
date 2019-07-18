@@ -24,10 +24,10 @@
         </v-list-tile>
         <v-list-tile @click="logout">
           <v-list-tile-action>
-            <v-icon></v-icon>
+            <v-icon>apps</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title></v-list-tile-title>
+            <v-list-tile-title>logout</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -43,7 +43,6 @@
       <v-btn icon @click.stop="fixed = !fixed">
         <v-icon>remove</v-icon>
       </v-btn>
-      <!-- <v-toolbar-title v-text="title" v-if="loggedInUser">{{loggedInUser.username}} </v-toolbar-title> -->
       <v-spacer />
     </v-toolbar>
     <v-content>
@@ -59,7 +58,6 @@
 
 <script>
 import {mapGetters} from 'vuex';
-
 export default {
   data() {
     return {
@@ -83,7 +81,7 @@ export default {
           to: '/register'
         },
         {
-          icon: '',
+          icon: 'apps',
           title: 'Login',
           to: '/login'
         },
@@ -92,11 +90,6 @@ export default {
           title: 'Profile',
           to: '/profile'
         },
-        {
-          icon: 'rowing',
-          title: 'Logout',
-          to: '/logout'
-        }
       ],
       miniVariant: false,
       right: true,
@@ -109,8 +102,10 @@ export default {
   },
   methods: {
     async logout() {
-      await this.$auth.logout();
-    },
+    await this.$auth.logout() 
+    Cookie.remove('auth')
+    this.$store.commit('setAuth', null);
+  },
 },
 }
 </script>

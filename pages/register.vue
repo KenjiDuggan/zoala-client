@@ -43,12 +43,12 @@
 </template>
 
 <script>
-import Notifications from '../components/Notifications';
-import axios from 'axios';
+import Notification from '../components/Notification';
+const Cookie = process.client ? require('js-cookie') : undefined;
 
 export default {
   components: {
-    Notifications
+    Notification
   },
   data () {
       return {
@@ -104,15 +104,19 @@ export default {
               data: {
                 email: this.email,
                 password: this.password
-              }
+              },
+              token: {
+                accessToken: 'someStringGotFromApiServiceWithAjax'
+            },
             })
+            this.$store.commit('setAuth', token);
+            Cookie.set('auth', token);
             this.$router.push('/');
           }catch(e){
-
             this.error = e.response.data.message
           }
         },
   },
-  middleware: 'guest'
+  middleware: 'guest',
 }
 </script>
