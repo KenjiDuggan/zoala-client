@@ -11,6 +11,7 @@ export const getters = {
 }
 
 export const state = () => ({
+  email: null,
   token: null
 })
 

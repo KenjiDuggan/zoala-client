@@ -38,7 +38,6 @@ export default {
   data () {
     return {
       workouts: null,
-
     }
   },
   mounted: function() {
@@ -50,8 +49,6 @@ export default {
       .then((response) => {this.workouts = response.data})
       .catch((e) => {console.log(e) })
 },
-middleware: 'auth',
-  }
-
-
+middleware: 'auth'
+  };
 </script>

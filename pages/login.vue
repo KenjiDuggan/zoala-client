@@ -65,6 +65,7 @@ export default {
             email: this.email,
             password: this.password
           }).then((response) =>
+          this.$store.state.email = this.email,
           console.log(response)
           );
 
@@ -78,20 +79,6 @@ export default {
             console.log(cancer);
             this.$store.state.auth.loggedIn = true;
           })
-
-          // await this.$axios.post('login', {
-          //     email: this.email,
-          //     password: this.password
-          //   }).then((response) => {
-          //     console.log(response.data);
-          //     const token = {
-          //   accessToken: response.data.token
-          //   }
-          //     this.$router.push('/');
-          //   }).catch((error) => {
-          //     console.log(error.response);
-          //     this.$router.push('/register');
-          //   })
 
         // this.$store.dispatch('asyncData');
         // this.$store.commit('setAuth', this.token);

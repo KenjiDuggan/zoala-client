@@ -93,19 +93,12 @@ export default {
     },
     async register() {
           try{
-          //    await this.$auth.loginWith('local', {
-          //    data: {
-          //     email: this.email,
-          //     password: this.password
-          //   }
-          //  })
             await this.$axios.post('register', {
               username: this.username,
               email: this.email,
               password: this.password
             }).then((response) => {
               console.log(response.data);
-
               this.$router.push('/login');
             }).catch((error) => {
               console.log(error.response);

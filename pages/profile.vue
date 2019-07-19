@@ -2,16 +2,11 @@
   <section class="section">
     <div class="container">
       <h2 class="title">My Profile</h2>
-      <div class="content" v-if="isAuthenticated">
-        <p>
-
-
-        </p>
-        <p>
+       <h1>
           <strong>Email:</strong>
-          {{ loggedInUser.email }}
-        </p>
-      </div>
+          {{email}}
+        </h1>
+      
       <div v-else>
         Get registered man
       </div>
@@ -23,9 +18,17 @@
 import { mapGetters } from 'vuex'
 
 export default {
+
+  state: {
+   email: ''
+  },
   computed: {
-    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+    email () {
+      return this.$store.state.email
+    },
+    ...mapGetters(['isAuthenticated', 'loggedInUser']),
   },
   middleware: 'auth',
-}
+};
+
 </script>
