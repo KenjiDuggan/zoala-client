@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Workout Planner</h1>
       <!-- <div v-for="workout of workouts" :key="workout.id">
         <li>{{ workout.name }}</li>
         <li>{{workout.description}}</li>
@@ -28,6 +29,7 @@
               </v-list-tile>
             </v-list>
           </v-card>
+
 </div>
 </div>
 </template>

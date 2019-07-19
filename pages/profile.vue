@@ -1,13 +1,21 @@
 <template>
   <section class="section">
     <div class="container">
-      <h2 class="title">My Profile</h2>
-       <h1>
+
+      <div v-if="isAuthenticated">
+        <h1>Your Profile: </h1>
+        <h2>
           <strong>Email:</strong>
-          {{email}}
-        </h1>
-      
+          <div>  </div>{{loggedInUser.email}}
+        </h2>
+        <h2>Token: {{token}}</h2>
+      </div>
+
       <div v-else>
+        You are not logged in, not user information.
+      </div>
+
+      <div>
         Get registered man
       </div>
     </div>
@@ -20,7 +28,8 @@ import { mapGetters } from 'vuex'
 export default {
 
   state: {
-   email: ''
+   email: '',
+   token: this.$store.state.token
   },
   computed: {
     email () {

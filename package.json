@@ -23,7 +23,8 @@
     "express": "^4.16.4",
     "js-cookie": "^2.2.0",
     "nuxt": "^2.0.0",
-    "vue-persistent-state": "^0.2.1"
+    "vue-persistent-state": "^0.2.1",
+    "vue-swal": "^1.0.0"
   },
   "devDependencies": {
     "stylus": "^0.54.5",

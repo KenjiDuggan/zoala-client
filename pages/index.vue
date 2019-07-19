@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-if="isAuthenticated">Wow great job!! {{ loggedInUser.username }}</div>
+  <div v-if="isAuthenticated">Wow great job!!:  {{ loggedInUser.email }}</div>
   <div v-else>Go get registered loser</div>
   </div>
 </template>

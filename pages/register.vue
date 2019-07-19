@@ -100,11 +100,20 @@ export default {
             }).then((response) => {
               console.log(response.data);
               this.$router.push('/login');
+              this.$swal(
+                'Thanks for registering!',
+                'Great!',
+                'Now please login'
+                );
             }).catch((error) => {
               console.log(error.response);
               this.$router.push('/register');
+              this.$swal(
+                'Something went wrong,',
+                'Please try again,',
+                );
             })
-            this.$router.push('/login');
+
           }catch(e){
             this.error = e.response.data.message
             console.log(this.error);

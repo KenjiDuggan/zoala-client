@@ -1,4 +1,4 @@
-const cookieparser = process.server ? require('cookie') : undefined
+// const cookieparser = process.server ? require('cookie') : undefined
 
 export const getters = {
   isAuthenticated(state) {
@@ -21,18 +21,17 @@ export const mutations = {
   }
 }
 
-export const actions = {
-  asyncData({ commit }, { req }) {
-    let token = this.state.token
-    if (process.server) {
-      if (req.headers.cookie) {
-        const parsed = cookieparser.parse(req.headers.cookie)
-        try {
-          token = JSON.parse(parsed.token)
-        } catch (err) {
-        }
-      }
-    }
-    commit('setAuth', token)
-  }
-}
+// export const actions = {
+//   asyncData({ commit }, { token }) {
+//     if (process.server) {
+//       if (res.headers.cookie) {
+//         const parsed = cookieparser.parse(res.headers.cookie)
+//         try {
+//           token = JSON.parse(parsed.token)
+//         } catch (err) {
+//         }
+//       }
+//     }
+//     commit('setAuth', token)
+//   }
+// }

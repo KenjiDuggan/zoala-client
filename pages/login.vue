@@ -45,6 +45,7 @@ export default {
         email: '',
         password: '',
         error: null,
+        response: ''
       }
     },
   methods: {
@@ -61,32 +62,41 @@ export default {
     },
     async login() {
       try {
-          await this.$axios.post('login', {
+        const response = await this.$axios.post('login', {
             email: this.email,
             password: this.password
-          }).then((response) =>
-          this.$store.state.email = this.email,
-          console.log(response)
-          );
+          })
+          this.response = response;
+
+          if(response.data.token){
+            this.$store.state.email = this.email;
+            this.$store.commit('setAuth', response.data.token);
+            Cookie.set('auth', response.data.token);
+            this.$store.state.auth.loggedIn = true;
+          }
+
+
+          this.$router.push('/');
 
           await this.$auth.loginWith('local', {
             data: {
               email: this.email,
               password: this.password,
             }
-          }).then((response) => {
-            let cancer = JSON.parse(response);
-            console.log(cancer);
+          })
+          .then((response) => {
             this.$store.state.auth.loggedIn = true;
+            this.$router.push('/');
+          })
+          .catch((e) => {
+            console.log(e);
           })
 
-        // this.$store.dispatch('asyncData');
-        // this.$store.commit('setAuth', this.token);
-        // Cookie.set('auth', token);
+
         this.$router.push('/')
       } catch (e) {
-        this.error = e.response.data.message
-
+        this.error = e.response;
+        console.log(e);
       }
     }
   },

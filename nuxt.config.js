@@ -38,7 +38,8 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/axios'
+    '~/plugins/axios',
+    '~/plugins/vue-swal'
   ],
   /*
    ** Nuxt.js modules
@@ -64,7 +65,7 @@ module.exports = {
       local: {
         endpoints: {
           login: { url: 'login', method: 'post', propertyName: 'data' },
-          user: { url: 'me', method: 'get', propertyName: 'email' },
+          user: { url: 'me', method: 'get', propertyName: null },
           logout: false
         }
       }
