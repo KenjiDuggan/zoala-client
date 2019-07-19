@@ -39,6 +39,8 @@
 
     <v-btn @click="register" :class="{ red: !valid, green: valid }">submit</v-btn>
     <v-btn @click="clear">clear</v-btn>
+    <v-divider></v-divider>
+    <nuxt-link to="/login"> <v-btn>Already have an account? Log in now</v-btn></nuxt-link>
   </v-form>
 </div>
 </template>
@@ -103,17 +105,6 @@ export default {
               console.log(error.response);
               this.$router.push('/register');
             })
-            // await this.$auth.loginWith('local', {
-            //   data: {
-            //     email: this.email,
-            //     password: this.password
-            //   },
-            // }).then((response) => {
-            //   console.log(response);
-            //   this.$router.push('/');
-            // }).catch((e) => {
-            //   console.log(e);
-            // })
             this.$router.push('/login');
           }catch(e){
             this.error = e.response.data.message

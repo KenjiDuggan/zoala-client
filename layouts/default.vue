@@ -24,10 +24,10 @@
         </v-list-tile>
         <v-list-tile @click="logout">
           <v-list-tile-action>
-            <v-icon>apps</v-icon>
+            <v-icon>flight_takeoff</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>logout</v-list-tile-title>
+            <v-list-tile-title>Skiirtt</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -76,6 +76,11 @@ export default {
           to: '/workout'
         },
         {
+          icon: 'poll',
+          title: 'Sleep',
+          to: '/'
+        },
+        {
           icon: 'person_add',
           title: 'Register',
           to: '/register'
@@ -86,7 +91,7 @@ export default {
           to: '/login'
         },
         {
-          icon: 'account_circle',
+          icon: 'mood',
           title: 'Profile',
           to: '/profile'
         },

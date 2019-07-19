@@ -49,7 +49,9 @@ export default {
       .get('http://localhost:3001/api/workout', {headers: headers})
       .then((response) => {this.workouts = response.data})
       .catch((e) => {console.log(e) })
-}
+},
+middleware: 'auth',
   }
+
 
 </script>

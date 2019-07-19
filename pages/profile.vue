@@ -1,33 +1,30 @@
 <template>
-    <div>
-        <v-container>
-            <v-layout row wrap>
-                <v-flex tag="h1" class="headline">My Profile</v-flex>
-            </v-layout>
-            <v-flex d-flex xs12 order-xs5>
-        <v-layout column>
-          <v-flex>
-            <v-card flat>
-              <v-card-text><strong>Username: </strong>{{ loggedInUser.username }}</v-card-text>
-            </v-card>
-          </v-flex>
-          <v-flex>
-            <v-card flat>
-              <v-card-text><strong>Email: </strong>{{ loggedInUser.email }}</v-card-text>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-        </v-container>
+  <section class="section">
+    <div class="container">
+      <h2 class="title">My Profile</h2>
+      <div class="content" v-if="isAuthenticated">
+        <p>
+          <strong>Username:</strong>
+          {{ loggedInUser.username }}
+        </p>
+        <p>
+          <strong>Email:</strong>
+          {{ loggedInUser.email }}
+        </p>
+      </div>
+      <div v-else>
+        Get registered man
+      </div>
     </div>
+  </section>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import { mapGetters } from 'vuex'
 
-export default{
+export default {
   computed: {
-    ...mapGetters(['loggedInUser'])
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
   },
   middleware: 'auth',
 }

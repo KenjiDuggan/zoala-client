@@ -87,8 +87,6 @@ export default {
           }).catch((e) => {
             console.log(e);
           })
-
-
         this.$store.dispatch('asyncData');
         this.$store.commit('setAuth', this.token);
         Cookie.set('auth', token);
