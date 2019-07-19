@@ -1,5 +1,7 @@
 <template>
 <div>
+   <h1>Register Now!</h1>
+  <divider></divider>
   <Notification :message="error" v-if="error"/>
     <v-form v-model="valid" ref="form">
     <v-text-field
@@ -95,6 +97,7 @@ export default {
               password: this.password
             }).then((response) => {
               console.log(response.data);
+
               this.$router.push('/login');
             }).catch((error) => {
               console.log(error.response);

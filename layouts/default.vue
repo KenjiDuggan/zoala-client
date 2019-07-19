@@ -71,22 +71,22 @@ export default {
           to: '/'
         },
         {
-          icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: 'fitness_center',
+          title: 'Workout',
+          to: '/workout'
         },
         {
-          icon: 'account-plus',
+          icon: 'person_add',
           title: 'Register',
           to: '/register'
         },
         {
-          icon: 'apps',
+          icon: 'person',
           title: 'Login',
           to: '/login'
         },
         {
-          icon: 'profile',
+          icon: 'account_circle',
           title: 'Profile',
           to: '/profile'
         },
@@ -102,7 +102,7 @@ export default {
   },
   methods: {
     async logout() {
-    await this.$auth.logout() 
+    await this.$auth.logout()
     Cookie.remove('auth')
     this.$store.commit('setAuth', null);
   },

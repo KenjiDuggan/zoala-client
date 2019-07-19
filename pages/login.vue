@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-expressions */
 <template>
 <div>
+  <h1>Login</h1>
+  <divider></divider>
   <Notification :message="error" v-if="error"/>
     <v-form v-model="valid" ref="form">
     <v-text-field

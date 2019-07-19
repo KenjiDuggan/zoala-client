@@ -1,11 +1,11 @@
 <template>
   <div>
-      <div v-for="workout of workouts" :key="workout.id">
+      <!-- <div v-for="workout of workouts" :key="workout.id">
         <li>{{ workout.name }}</li>
         <li>{{workout.description}}</li>
         <li></li>
-      </div>
-<div v-for="workout of workouts" :key="workout.id">
+      </div> -->
+<div v-for="workouts of workouts" :key="workouts.id">
           <v-card>
             <v-card-title><h4>{{ workouts.name }}</h4></v-card-title>
             <v-divider></v-divider>
@@ -27,7 +27,6 @@
                 <v-list-tile-content class="align-end">{{ workouts.sets }}</v-list-tile-content>
               </v-list-tile>
             </v-list>
-            <div>{{workouts}}</div>
           </v-card>
 </div>
 </div>
@@ -38,20 +37,19 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      workouts: []
+      workouts: null,
+
     }
   },
-  computed() {
-      axios.defaults.headers.common['Authorization'] = 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDJiYmExYjM4YWI1YTBmZmNmNTU2MmMiLCJ1c2VybmFtZSI6InJlZUBvay5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRqVHRTZ0lkNHZIdUJiMGM5eHlMRjJlWEpHV1I5cDFaekV4WmVkRWNMUTJ2ckR5a3YwdVRIcSIsIl9fdiI6MCwiaWF0IjoxNTYzMTQ2Nzg5LCJleHAiOjE1NjM3NTE1ODl9.JvtXhm1Nf571xw4WD68g-0lGWSYhFKt3ZoLdmqMgSdE' // for all requests
-      let headers = {
-          'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDJiYmExYjM4YWI1YTBmZmNmNTU2MmMiLCJ1c2VybmFtZSI6InJlZUBvay5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRqVHRTZ0lkNHZIdUJiMGM5eHlMRjJlWEpHV1I5cDFaekV4WmVkRWNMUTJ2ckR5a3YwdVRIcSIsIl9fdiI6MCwiaWF0IjoxNTYzMTQ2Nzg5LCJleHAiOjE1NjM3NTE1ODl9.JvtXhm1Nf571xw4WD68g-0lGWSYhFKt3ZoLdmqMgSdE',
-          'Content-Type': 'application/x-www-form-urlencoded'
-      };
-      axios.get('http:localhost:3001/api/workout', {headers: headers})
-      .then(((response) => (this.workouts = response.data)))
-      .catch((e) => console.log(e))
-  },
-  methods: {
-  }
+  mounted: function() {
+    var headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDJiYmExYjM4YWI1YTBmZmNmNTU2MmMiLCJ1c2VybmFtZSI6InJlZUBvay5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRqVHRTZ0lkNHZIdUJiMGM5eHlMRjJlWEpHV1I5cDFaekV4WmVkRWNMUTJ2ckR5a3YwdVRIcSIsIl9fdiI6MCwiaWF0IjoxNTYzMTQ2Nzg5LCJleHAiOjE1NjM3NTE1ODl9.JvtXhm1Nf571xw4WD68g-0lGWSYhFKt3ZoLdmqMgSdE'}
+    axios
+      .get('http://localhost:3001/api/workout', {headers: headers})
+      .then((response) => {this.workouts = response.data})
+      .catch((e) => {console.log(e) })
 }
+  }
+
 </script>
