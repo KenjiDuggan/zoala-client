@@ -1,43 +1,32 @@
 <template>
   <div>
-    <h1>Workout posts</h1>
-    <p>Fetching workouts...</p>
-
-    <v-btn @click="fetchWorkout">Skidit please</v-btn>
-    <div v-if="loggedInUser">wow</div>
-      <div v-for="workout of workouts" :key="workout.id">
-        <li>{{ workout.name }}</li>
-        <li>{{workout.description}}</li>
-      </div>
-
+    <div v-for="workouts in workouts" :key="workouts._id">
+      <h2>{{workouts.name}}</h2>
+      <h2>{{workouts.description}}</h2>
+      <h2>{{workouts.weight}}</h2>
+      <h2>{{workouts.reps}}</h2>
+   </div>
   </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
   data () {
     return {
-      workouts: []
+      workouts: null,
+
     }
   },
-  methods: {
-    async fetchWorkout() {
-      try {
-        this.$axios.setToken(token, '');
-        await this.$auth.workout('local', {
-          data: {
-            name: this.name,
-            description: this.description,
-            weight: this.weight,
-            reps: this.reps,
-            type: this.type
-          }
-        })
-        this.workouts = JSON.parse(data);
-      } catch (e) {
-        this.error = e.response.data.message
-        this.$router.push('/register')
-      }
-    }
-  }
+  mounted: function() {
+    var headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDJiYmExYjM4YWI1YTBmZmNmNTU2MmMiLCJ1c2VybmFtZSI6InJlZUBvay5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRqVHRTZ0lkNHZIdUJiMGM5eHlMRjJlWEpHV1I5cDFaekV4WmVkRWNMUTJ2ckR5a3YwdVRIcSIsIl9fdiI6MCwiaWF0IjoxNTYzMTQ2Nzg5LCJleHAiOjE1NjM3NTE1ODl9.JvtXhm1Nf571xw4WD68g-0lGWSYhFKt3ZoLdmqMgSdE'}
+    axios
+      .get('http://localhost:3001/api/workout', {headers: headers})
+      .then((response) => {this.workouts = response.data})
+      .catch((e) => {console.log(e) })
 }
+  }
+
 </script>

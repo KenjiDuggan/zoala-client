@@ -58,25 +58,45 @@ export default {
     },
     async login() {
       try {
-        await this.$token.loginWith('local', {
-          data: {
-            email: this.email,
-            password: this.password
-          },
-          token: {
-            accessToken: 'someStringGotFromApiServiceWithAjax'
-          },
-        })
-         this.$store.dispatch('asyncData');
-         this.$store.commit('settoken', token);
-         Cookie.set('token', token);
-         this.$router.push('/');
+          await this.$axios.post('login', {
+              email: this.email,
+              password: this.password
+            }).then((response) => {
+              console.log(response.data);
+              const token = {
+          accessToken: response.data.token
+        }
+              this.$router.push('/');
+            }).catch((error) => {
+              console.log(error.response);
+              this.$router.push('/register');
+            })
+
+          await this.$auth.loginWith('local', {
+            data: {
+              email: this.email,
+              password: this.password,
+            }
+          }).then((response) => {
+            console.log(response);
+            if(response){
+              console.log(response);
+            }
+          }).catch((e) => {
+            console.log(e);
+          })
+
+
+        this.$store.dispatch('asyncData');
+        this.$store.commit('setAuth', this.token);
+        Cookie.set('auth', token);
+        this.$router.push('/')
       } catch (e) {
         this.error = e.response.data.message
-        this.$router.push('/register')
+        this.$router.push('/')
       }
-    },
+    }
   },
   middleware: 'guest'
-  }  
+  }
 </script>

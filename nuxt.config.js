@@ -1,7 +1,7 @@
 const colors = require('vuetify/es5/util/colors').default
 
 module.exports = {
-  mode: 'universal',
+  mode: 'spa',
   /*
    ** Headers of the page
    */
@@ -33,11 +33,13 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],  
+  css: [],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    '~/plugins/axios'
+  ],
   /*
    ** Nuxt.js modules
    */
@@ -56,13 +58,13 @@ module.exports = {
   axios: {
     baseURL: 'http://localhost:3001/api'
   },
+
   auth: {
     strategies: {
       local: {
         endpoints: {
           login: { url: 'login', method: 'post', propertyName: 'data.token' },
-          register: {url: 'register', method: 'post', propertyName: 'data.token'},
-          user: { url: 'workout', method: 'get', propertyName: 'data.workouts' },
+          user: { url: 'workout', method: 'get', propertyName: 'data' },
           logout: false
         },
         tokenRequired: true,

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 <template>
 <div>
   <Notification :message="error" v-if="error"/>
@@ -45,7 +44,6 @@
 <script>
 import Notification from '../components/Notification';
 const Cookie = process.client ? require('js-cookie') : undefined;
-
 export default {
   components: {
     Notification
@@ -96,25 +94,28 @@ export default {
               email: this.email,
               password: this.password
             }).then((response) => {
-              console.log(response);
+              console.log(response.data);
+              this.$router.push('/login');
             }).catch((error) => {
               console.log(error.response);
+              this.$router.push('/register');
             })
-            await this.$auth.loginWith('local', {
-              data: {
-                email: this.email,
-                password: this.password
-              },
-              token: {
-                accessToken: 'someStringGotFromApiServiceWithAjax'
-            },
-            })
-            this.$store.dispatch('asyncData');
-            this.$store.commit('setAuth', token);
-            Cookie.set('auth', token);
-            this.$router.push('/');
+            // await this.$auth.loginWith('local', {
+            //   data: {
+            //     email: this.email,
+            //     password: this.password
+            //   },
+            // }).then((response) => {
+            //   console.log(response);
+            //   this.$router.push('/');
+            // }).catch((e) => {
+            //   console.log(e);
+            // })
+            this.$router.push('/login');
           }catch(e){
             this.error = e.response.data.message
+            console.log(this.error);
+            this.$router.push('/register');
           }
         },
   },
