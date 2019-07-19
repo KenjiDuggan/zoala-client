@@ -4,8 +4,8 @@
       <h2 class="title">My Profile</h2>
       <div class="content" v-if="isAuthenticated">
         <p>
-          <strong>Username:</strong>
-          {{ loggedInUser.username }}
+
+
         </p>
         <p>
           <strong>Email:</strong>

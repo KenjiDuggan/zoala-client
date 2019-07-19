@@ -18,7 +18,7 @@
       required
     ></v-text-field>
     <v-btn @click="login" :class="{ red: !valid, green: valid }">submit</v-btn>
-    <v-btn @click="clear">clear</v-btn>
+    <v-btn @click="reset">clear</v-btn>
   </v-form>
 </div>
 </template>
@@ -28,6 +28,7 @@ import Notification from '../components/Notification';
 const Cookie = process.client ? require('js-cookie') : undefined;
 
 export default {
+  middleware: 'guest',
   components: {
     Notification
   },
@@ -61,18 +62,11 @@ export default {
     async login() {
       try {
           await this.$axios.post('login', {
-              email: this.email,
-              password: this.password
-            }).then((response) => {
-              console.log(response.data);
-              const token = {
-          accessToken: response.data.token
-        }
-              this.$router.push('/');
-            }).catch((error) => {
-              console.log(error.response);
-              this.$router.push('/register');
-            })
+            email: this.email,
+            password: this.password
+          }).then((response) =>
+          console.log(response)
+          );
 
           await this.$auth.loginWith('local', {
             data: {
@@ -80,23 +74,34 @@ export default {
               password: this.password,
             }
           }).then((response) => {
-            console.log(response);
-            if(response){
-              console.log(response);
-            }
-          }).catch((e) => {
-            console.log(e);
+            let cancer = JSON.parse(response);
+            console.log(cancer);
+            this.$store.state.auth.loggedIn = true;
           })
-        this.$store.dispatch('asyncData');
-        this.$store.commit('setAuth', this.token);
-        Cookie.set('auth', token);
+
+          // await this.$axios.post('login', {
+          //     email: this.email,
+          //     password: this.password
+          //   }).then((response) => {
+          //     console.log(response.data);
+          //     const token = {
+          //   accessToken: response.data.token
+          //   }
+          //     this.$router.push('/');
+          //   }).catch((error) => {
+          //     console.log(error.response);
+          //     this.$router.push('/register');
+          //   })
+
+        // this.$store.dispatch('asyncData');
+        // this.$store.commit('setAuth', this.token);
+        // Cookie.set('auth', token);
         this.$router.push('/')
       } catch (e) {
         this.error = e.response.data.message
-        this.$router.push('/')
+
       }
     }
   },
-  middleware: 'guest'
   }
 </script>

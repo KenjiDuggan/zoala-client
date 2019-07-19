@@ -63,12 +63,10 @@ module.exports = {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'data.token' },
-          user: { url: 'workout', method: 'get', propertyName: 'data' },
+          login: { url: 'login', method: 'post', propertyName: 'data' },
+          user: { url: 'me', method: 'get', propertyName: 'email' },
           logout: false
-        },
-        tokenRequired: true,
-        tokenType: 'Bearer'
+        }
       }
     }
   },

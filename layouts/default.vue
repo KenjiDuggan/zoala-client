@@ -7,22 +7,22 @@
       fixed
       app
     >
+     <template v-if="isAuthenticated">
       <v-list>
         <v-list-tile
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
+          v-for="useractive in useractives"
+          :to="useractive.to"
           router
           exact
         >
           <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>{{ useractive.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title v-text="item.title" />
+            <v-list-tile-title v-text="useractive.title" />
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="logout">
+          <v-list-tile @click="logout">
           <v-list-tile-action>
             <v-icon>flight_takeoff</v-icon>
           </v-list-tile-action>
@@ -30,7 +30,25 @@
             <v-list-tile-title>Skiirtt</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-      </v-list>
+       </v-list>
+       </template>
+       <template v-if="!isAuthenticated">
+       <v-list>
+        <v-list-tile
+          v-for="usernot in usernots"
+          :to="usernot.to"
+          router
+          exact
+        >
+          <v-list-tile-action>
+            <v-icon>{{ usernot.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title v-text="usernot.title" />
+          </v-list-tile-content>
+        </v-list-tile>
+       </v-list>
+      </template>
     </v-navigation-drawer>
     <v-toolbar :clipped-left="clipped" fixed app>
       <v-toolbar-side-icon @click="drawer = !drawer" />
@@ -57,6 +75,7 @@
 </template>
 
 <script>
+const Cookie = process.client ? require('js-cookie') : undefined;
 import {mapGetters} from 'vuex';
 export default {
   data() {
@@ -64,7 +83,7 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
+      useractives: [
         {
           icon: 'apps',
           title: 'Welcome',
@@ -81,6 +100,18 @@ export default {
           to: '/'
         },
         {
+          icon: 'mood',
+          title: 'Profile',
+          to: '/profile'
+        },
+      ],
+      usernots: [
+                {
+          icon: 'apps',
+          title: 'Welcome',
+          to: '/'
+        },
+        {
           icon: 'person_add',
           title: 'Register',
           to: '/register'
@@ -89,11 +120,6 @@ export default {
           icon: 'person',
           title: 'Login',
           to: '/login'
-        },
-        {
-          icon: 'mood',
-          title: 'Profile',
-          to: '/profile'
         },
       ],
       miniVariant: false,
