@@ -57,7 +57,14 @@ module.exports = {
    */
 
   axios: {
-    baseURL: 'http://localhost:8081/'
+    baseURL: 'http://localhost:8081/',
+    requestInterceptor: ($axios, { store }) => {
+      $axios.headers.common['Authorization'] = store.state.token
+      $axios.headers.common['access-token'] = store.state.token
+      $axios.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
+      return $axios
+    },
+    responseInterceptor: (res, ctx) => { }
   },
 
   auth: {

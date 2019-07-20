@@ -17,23 +17,35 @@ export const state = () => ({
   token: null
 })
 
-export const mutations = {
-  setAuth(state, token) {
-    state.token = token
+export const actions = {
+  setAuth({ commit }, { token }) {
+    // if (process.server) {
+    //   if (res.headers.cookie) {
+    //     const parsed = cookieparser.parse(res.headers.cookie)
+    //     try {
+    //       token = JSON.parse(parsed.token)
+    //     } catch (err) {
+    //     }
+    //   }
+    // }
+    commit('setAuth', token)
+  },
+  setUsername({ commit }, username) {
+    commit('setUsername', username)
+  },
+  setEmail({ commit }, email) {
+    commit('setEmail', email)
   }
 }
 
-// export const actions = {
-//   asyncData({ commit }, { token }) {
-//     if (process.server) {
-//       if (res.headers.cookie) {
-//         const parsed = cookieparser.parse(res.headers.cookie)
-//         try {
-//           token = JSON.parse(parsed.token)
-//         } catch (err) {
-//         }
-//       }
-//     }
-//     commit('setAuth', token)
-//   }
-// }
+export const mutations = {
+  setAuth(state, token) {
+    state.token = token
+  },
+  setUsername(state, username) {
+    state.username = username
+  },
+  setEmail(state, email) {
+    state.email = email
+  }
+}

@@ -25,7 +25,7 @@
 
 <script>
 import Notification from '../components/Notification';
-const Cookie = process.client ? require('js-cookie') : undefined;
+// const Cookie = process.client ? require('js-cookie') : undefined;
 
 export default {
   middleware: 'guest',
@@ -45,7 +45,8 @@ export default {
         email: '',
         password: '',
         error: null,
-        response: ''
+        response: '',
+        id: ''
       }
     },
   methods: {
@@ -67,15 +68,13 @@ export default {
             password: this.password
           })
           this.response = response;
-
+          console.log(response.data.token);
           if(response.data.token){
             this.$auth.setToken('local', response.data.token)
             this.$store.state.email = this.email;
             this.$store.commit('setAuth', response.data.token);
-            Cookie.set('auth', response.data.token);
-            this.$store.state.auth.loggedIn = true;
+            console.log(this.$store.state.token);
           }
-
           await this.$auth.loginWith('local', {
             data: {
               email: this.email,

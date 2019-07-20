@@ -96,7 +96,6 @@ export default {
                 },
                 {
                     day: "thursday",
-                    bodyPart: "",
                     workouts: []
                 },
                 {
