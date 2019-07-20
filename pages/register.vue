@@ -68,10 +68,10 @@ export default {
         ],
         select: null,
         items: [
-          'Item 1',
-          'Item 2',
-          'Item 3',
-          'Item 4'
+          'Get Thick',
+          'Get Lean',
+          'Get Smart',
+          'Get Sleep'
         ],
         checkbox: true,
         username: '',

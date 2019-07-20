@@ -57,7 +57,7 @@ module.exports = {
    */
 
   axios: {
-    baseURL: 'http://localhost:3001/api'
+    baseURL: 'http://localhost:8081/'
   },
 
   auth: {
