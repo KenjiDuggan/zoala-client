@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-if="isAuthenticated">Wow great job!!:  {{ loggedInUser.email }}</div>
+  <div v-if="isAuthenticated">Wow great job!!:  {{ this.$store.state.username }}</div>
   <div v-else>Go get registered loser</div>
   </div>
 </template>
@@ -17,7 +17,7 @@ export default {
   },
 computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser'])
-  }
+    }
   }
 
 </script>

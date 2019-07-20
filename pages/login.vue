@@ -69,14 +69,12 @@ export default {
           this.response = response;
 
           if(response.data.token){
+            this.$auth.setToken('local', response.data.token)
             this.$store.state.email = this.email;
             this.$store.commit('setAuth', response.data.token);
             Cookie.set('auth', response.data.token);
             this.$store.state.auth.loggedIn = true;
           }
-
-
-          this.$router.push('/');
 
           await this.$auth.loginWith('local', {
             data: {
@@ -91,8 +89,6 @@ export default {
           .catch((e) => {
             console.log(e);
           })
-
-
         this.$router.push('/')
       } catch (e) {
         this.error = e.response;

@@ -91,8 +91,8 @@ export default {
         },
         {
           icon: 'fitness_center',
-          title: 'Workout',
-          to: '/workout'
+          title: 'Gains',
+          to: '/muscle'
         },
         {
           icon: 'poll',

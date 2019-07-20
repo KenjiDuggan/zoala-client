@@ -98,6 +98,9 @@ export default {
               email: this.email,
               password: this.password
             }).then((response) => {
+              this.$store.state.email = this.email;
+              this.$store.state.password = this.password;
+              this.$store.state.username = this.username;
               console.log(response.data);
               this.$router.push('/login');
               this.$swal(
