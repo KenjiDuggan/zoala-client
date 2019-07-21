@@ -51,15 +51,15 @@
       </template>
     </v-navigation-drawer>
     <v-toolbar :clipped-left="clipped" fixed app>
-      <v-toolbar-side-icon @click="drawer = !drawer" />
+      <v-toolbar-side-icon @click="drawer = !drawer"><v-icon icon>menu</v-icon></v-toolbar-side-icon>
       <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <!-- <v-icon>{{ `chevron_${miniVariant ? 'right' : 'left'}` }}</v-icon> -->
+        <v-icon>{{ `chevron_${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
       <v-btn icon @click.stop="clipped = !clipped">
         <v-icon>web</v-icon>
       </v-btn>
       <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>remove</v-icon>
+        <v-icon>link</v-icon>
       </v-btn>
       <v-spacer />
     </v-toolbar>
@@ -117,7 +117,7 @@ export default {
           to: '/register'
         },
         {
-          icon: 'person',
+          icon: 'exit_to_app',
           title: 'Login',
           to: '/login'
         },

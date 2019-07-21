@@ -1,25 +1,35 @@
 /* eslint-disable no-unused-expressions */
 <template>
 <div>
-  <h1>Login</h1>
-  <divider></divider>
   <Notification :message="error" v-if="error"/>
-    <v-form v-model="valid" ref="form">
-    <v-text-field
-      label="E-mail"
-      v-model="email"
-      :rules="emailRules"
-      required
-    ></v-text-field>
-        <v-text-field
-      label="Password"
-      v-model="password"
-      :rules="passwordRules"
-      required
-    ></v-text-field>
-    <v-btn @click="login" :class="{ red: !valid, green: valid }">submit</v-btn>
-    <v-btn @click="reset">clear</v-btn>
-  </v-form>
+  <br/>
+
+  <v-container class="accent rounded-corner">
+       <br/>
+  <h1 class="text-xs-center display-1 info--text">login</h1>
+  <br/>
+    <divider></divider>
+      <v-layout align-center>
+        <v-flex class="text-sm-center">
+          <v-form v-model="valid" ref="form" class="info--text">
+            <v-text-field
+              label="E-mail"
+              v-model="email"
+              :rules="emailRules"
+              required
+            ></v-text-field>
+                <v-text-field
+              label="Password"
+              v-model="password"
+              :rules="passwordRules"
+              required
+            ></v-text-field>
+            <v-btn @click="login" class="success rounded-corners to-lower">start</v-btn>
+            <v-btn @click="reset" class="rounded-corners warning to-lower">woops</v-btn>
+           </v-form>
+         </v-flex>
+        </v-layout>
+    </v-container>
 </div>
 </template>
 
@@ -97,3 +107,15 @@ export default {
   },
   }
 </script>
+
+<style scoped>
+.rounded-corner{
+  border-radius: 15px;
+}
+.rounded-corners{
+  border-radius: 10px;
+}
+.to-lower{
+  text-transform: none !important;
+}
+</style>

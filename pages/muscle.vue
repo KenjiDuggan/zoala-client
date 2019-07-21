@@ -19,14 +19,14 @@
       </v-layout>
     </v-container>
   </v-jumbotron>
-   
+
 
   <div class="d-flex justify-between align-center mb-3">
       <v-btn @click="all">Check all week!</v-btn>
       <v-btn @click="none">Close Em'</v-btn>
   </div>
 
-  
+
   <h2>{{muscle[2].name}}</h2>
   <v-divider></v-divider>
   <h3>{{muscle[2].description}}</h3>
@@ -45,7 +45,7 @@
                  <h4>{{muscle[2].schedule[i].bodyPart}}</h4>
                  <div
                             :key="j"
-                            v-for="(workout, i) in muscle[2].schedule[i].workouts[j]"
+                            v-for="(workout, j) in muscle[2].schedule[i].workouts[j]"
                             class="my-1"
                         >{{ workout }}</div>
               </v-card-text>
@@ -63,7 +63,7 @@
     </v-expansion-panel-content>
   </v-expansion-panel>
   </div>
-</div>
+
 </template>
 
 <script>
@@ -99,7 +99,7 @@ export default {
         .then((response) => {
             console.log(response.data);
             this.muscle = response.data;
-             
+
             this.$store.commit('setMuscle', response.data);
         }).catch((error) => {
             console.log(error);

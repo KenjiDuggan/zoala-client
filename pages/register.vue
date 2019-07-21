@@ -1,47 +1,52 @@
 <template>
 <div>
-   <h1>Register Now!</h1>
-  <divider></divider>
-  <Notification :message="error" v-if="error"/>
-    <v-form v-model="valid" ref="form">
-    <v-text-field
-      label="Name"
-      v-model="username"
-      :rules="usernameRules"
-      :counter="10"
-      required
-    ></v-text-field>
-    <v-text-field
-      label="E-mail"
-      v-model="email"
-      :rules="emailRules"
-      required
-    ></v-text-field>
-        <v-text-field
-      label="Password"
-      v-model="password"
-      :rules="passwordRules"
-      required
-    ></v-text-field>
-    <v-select
-      label="Item"
-      v-model="select"
-      :items="items"
-      :rules="[(v) => !!v || 'Item is required']"
-      required
-    ></v-select>
-    <v-checkbox
-      label="Do you agree?"
-      v-model="checkbox"
-      :rules="[(v) => !!v || 'You must agree to continue!']"
-      required
-    ></v-checkbox>
 
-    <v-btn @click="register" :class="{ red: !valid, green: valid }">submit</v-btn>
-    <v-btn @click="clear">clear</v-btn>
-    <v-divider></v-divider>
-    <nuxt-link to="/login"> <v-btn>Already have an account? Log in now</v-btn></nuxt-link>
-  </v-form>
+  <Notification :message="error" v-if="error"/>
+  <br/>
+    <v-container class="accent rounded-corner">
+         <br/>
+
+   <h1 class="text-xs-center display-1 info--text">register</h1>
+   <br/>
+  <divider></divider>
+      <v-layout align-center>
+         <v-flex class="text-sm-center">
+          <v-form v-model="valid" ref="form" class="info--text">
+          <v-text-field
+            label="Name"
+            v-model="username"
+            :rules="usernameRules"
+            :counter="10"
+            required
+          ></v-text-field>
+          <v-text-field
+            label="E-mail"
+            v-model="email"
+            :rules="emailRules"
+            required
+          ></v-text-field>
+              <v-text-field
+            label="Password"
+            v-model="password"
+            :rules="passwordRules"
+            required
+          ></v-text-field>
+          <v-select
+            label="Item"
+            v-model="select"
+            :items="items"
+            :rules="[(v) => !!v || 'Item is required']"
+            required
+          ></v-select>
+          <br/>
+          <v-btn @click="register" class="rounded-corners success to-lower">register</v-btn>
+          <v-btn @click="reset" class="rounded-corners warning to-lower">woops</v-btn>
+          <br/>
+        </v-form>
+         </v-flex>
+      </v-layout>
+    </v-container>
+
 </div>
 </template>
 
@@ -127,3 +132,15 @@ export default {
   middleware: 'guest',
 }
 </script>
+
+<style scoped>
+.rounded-corner{
+  border-radius: 15px;
+}
+.rounded-corners{
+  border-radius: 10px;
+}
+.to-lower{
+  text-transform: none !important;
+}
+</style>
