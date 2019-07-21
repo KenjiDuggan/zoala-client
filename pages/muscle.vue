@@ -43,11 +43,11 @@
          <v-card>
               <v-card-text>
                  <h4>{{muscle[2].schedule[i].bodyPart}}</h4>
-                 <div
+                 <!-- <div
                             :key="j"
                             v-for="(workout, j) in muscle[2].schedule[i].workouts[j]"
                             class="my-1"
-                        >{{ workout }}</div>
+                        >{{ workout }}</div> -->
               </v-card-text>
           </v-card>
           <!-- <v-card>

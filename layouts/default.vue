@@ -85,9 +85,9 @@ export default {
       fixed: false,
       useractives: [
         {
-          icon: 'apps',
-          title: 'Welcome',
-          to: '/home'
+          icon: 'offline_bolt',
+          title: 'Inspiration',
+          to: '/inspire'
         },
         {
           icon: 'fitness_center',
@@ -97,7 +97,7 @@ export default {
         {
           icon: 'poll',
           title: 'Sleep',
-          to: '/'
+          to: '/sleep'
         },
         {
           icon: 'mood',

@@ -7,6 +7,15 @@ export const getters = {
 
   loggedInUser(state) {
     return state.auth.user
+  },
+  email(state) {
+    return state.email
+  },
+  username(state) {
+    return state.username
+  },
+  token(state)  {
+    return state.token
   }
 }
 
@@ -15,7 +24,7 @@ export const state = () => ({
   username: null,
   password: null,
   token: null,
-  muscle: null,
+  muscle: null
 })
 
 export const actions = {

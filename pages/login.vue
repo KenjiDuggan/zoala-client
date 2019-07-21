@@ -78,10 +78,12 @@ export default {
             password: this.password
           })
           this.response = response;
-          console.log(response.data.token);
+          console.log(response.user);
+
           if(response.data.token){
             this.$auth.setToken('local', response.data.token)
             this.$store.state.email = this.email;
+            this.$store.state.username = response.data.username;
             this.$store.commit('setAuth', response.data.token);
             console.log(this.$store.state.token);
           }

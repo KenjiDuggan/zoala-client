@@ -1,24 +1,14 @@
+
 <template>
-  <section class="section">
-    <div class="container">
-
-      <div v-if="isAuthenticated">
-        <h1>Your Profile: {{this.$store.state.username}}</h1>
-        <v-divider></v-divider>
-        <h2>
-          <strong>Email:</strong>
-          <div>  </div>{{this.$store.state.email}}
-        </h2>
-        <h2>Password: {{this.$store.state.email}}</h2>
-        <h2>Token: {{this.$store.state.token}}</h2>
-      </div>
-
-      <div v-else>
-        <h2 class="display-2">Go get registered!!!!</h2>
-      </div>
-
-    </div>
-  </section>
+  <div>
+    <v-container class="primary--text success"> 
+      <h1>welcome {{this.$store.state.username}}</h1>
+      <br/>
+      <v-divider></v-divider>
+      <h3>Email: {{this.$store.state.email}}</h3>
+      <h3>Token: {{this.$store.state.token}}</h3>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -30,5 +20,4 @@ export default {
   },
   middleware: 'auth',
 };
-
 </script>

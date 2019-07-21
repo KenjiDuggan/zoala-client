@@ -1,19 +1,35 @@
 <template>
 <div>
-  <div>Inspire me</div>
-  <li v-for="wow in wows"  :key="wow._id">
-    <span>{{wow}}</span>
-  </li>
+  <h1 style="text-xs-center">Inspiration?</h1>
+  <v-carousel>
+    <v-carousel-item
+      v-for="(item,i) in items"
+      :key="i"
+      :src="item.src"
+    ></v-carousel-item>
+  </v-carousel>
 </div>
 </template>
-
-<script>
-
-export default {
-  computed: {
-    wows(){
-      return this.$store.state.token
+ 
+ <script>
+  export default {
+    data () {
+      return {
+        items: [
+          {
+          src: '~/assets/church.jpg'
+          },
+          {
+            src: '~/assets/country.jpg'
+          },
+          {
+            src: '~/assets/vangoth.jpg'
+          },
+          {
+            src: '~/assets/woman.jpg'
+          }
+        ]
+      }
     }
-  },
-}
+  }
 </script>
