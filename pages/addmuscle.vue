@@ -121,9 +121,6 @@ export default {
             array.push(item);
             this.workoutPlaceholders = ["", "", "", "", "", "", ""];
         },
-        deleteWorkout(array, item) {
-            array.pop(item);
-        },
         sendMuscle() {
             this.$axios
                 .post("/muscle", {

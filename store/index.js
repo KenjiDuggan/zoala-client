@@ -14,7 +14,8 @@ export const state = () => ({
   email: null,
   username: null,
   password: null,
-  token: null
+  token: null,
+  muscle: null,
 })
 
 export const actions = {
@@ -35,6 +36,9 @@ export const actions = {
   },
   setEmail({ commit }, email) {
     commit('setEmail', email)
+  },
+  setMuscle({ commit }, muscle) {
+    commit('setMuscle', muscle)
   }
 }
 
@@ -47,5 +51,8 @@ export const mutations = {
   },
   setEmail(state, email) {
     state.email = email
+  },
+  setMuscle(state, muscle) {
+    state.muscle = muscle
   }
 }

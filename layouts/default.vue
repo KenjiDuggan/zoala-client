@@ -53,7 +53,7 @@
     <v-toolbar :clipped-left="clipped" fixed app>
       <v-toolbar-side-icon @click="drawer = !drawer" />
       <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>{{ `chevron_${miniVariant ? 'right' : 'left'}` }}</v-icon>
+        <!-- <v-icon>{{ `chevron_${miniVariant ? 'right' : 'left'}` }}</v-icon> -->
       </v-btn>
       <v-btn icon @click.stop="clipped = !clipped">
         <v-icon>web</v-icon>
@@ -69,7 +69,7 @@
       </v-container>
     </v-content>
     <v-footer :fixed="fixed" app>
-      <span>&copy; 2019</span>
+      <span>&copy; zoala 2019</span>
     </v-footer>
   </v-app>
 </template>
@@ -87,7 +87,7 @@ export default {
         {
           icon: 'apps',
           title: 'Welcome',
-          to: '/'
+          to: '/home'
         },
         {
           icon: 'fitness_center',
