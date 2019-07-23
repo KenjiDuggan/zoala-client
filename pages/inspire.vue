@@ -1,6 +1,8 @@
 <template>
 <div>
-  <h1 style="text-xs-center">Inspiration?</h1>
+  <h1 class="text-xs-center display-3">Inspiration?</h1>
+  <br/>
+  <br/>
   <v-carousel>
     <v-carousel-item
       v-for="(item,i) in items"
@@ -12,21 +14,26 @@
 </template>
  
  <script>
+const church = require('../assets/church.jpg');
+const country = require('../assets/country.jpg');
+const vangoth = require('../assets/vangoth.jpg');
+const woman = require('../assets/woman.jpg');
+
   export default {
     data () {
       return {
         items: [
           {
-          src: '~/assets/church.jpg'
+          src:church
           },
           {
-            src: '~/assets/country.jpg'
+          src:country
           },
           {
-            src: '~/assets/vangoth.jpg'
+          src:vangoth
           },
           {
-            src: '~/assets/woman.jpg'
+          src:woman
           }
         ]
       }

@@ -1,12 +1,17 @@
-// const cookieparser = process.server ? require('cookie') : undefined
+
+const cookieparser = process.server ? require('cookieparser') : undefined
+
+import Vuex from 'vuex'
 
 export const getters = {
   isAuthenticated(state) {
     return state.auth.loggedIn
   },
-
   loggedInUser(state) {
     return state.auth.user
+  },
+  muscle(state) {
+    return state.muscle
   },
   email(state) {
     return state.email
@@ -14,31 +19,31 @@ export const getters = {
   username(state) {
     return state.username
   },
-  token(state)  {
-    return state.token
+  auth(state) {
+    return state.auth
   }
-}
+};
 
 export const state = () => ({
+  auth: null,
   email: null,
   username: null,
   password: null,
+  muscle: null,
   token: null,
-  muscle: null
-})
+});
 
 export const actions = {
-  setAuth({ commit }, { token }) {
-    // if (process.server) {
-    //   if (res.headers.cookie) {
-    //     const parsed = cookieparser.parse(res.headers.cookie)
-    //     try {
-    //       token = JSON.parse(parsed.token)
-    //     } catch (err) {
-    //     }
-    //   }
-    // }
-    commit('setAuth', token)
+  nuxtServerInit({ commit }, { req }) {
+    let auth = null
+    if (req.headers.cookie) {
+      const parsed = cookieparser.parse(req.headers.cookie)
+      try {
+        auth = JSON.parse(parsed.auth)
+      } catch (err) {
+      }
+    }
+    commit('setAuth', auth)
   },
   setUsername({ commit }, username) {
     commit('setUsername', username)
@@ -48,12 +53,16 @@ export const actions = {
   },
   setMuscle({ commit }, muscle) {
     commit('setMuscle', muscle)
+  },
+  setAuth({ commit }, auth) {
+    commit('setAuth', auth)
   }
-}
+};
+
 
 export const mutations = {
-  setAuth(state, token) {
-    state.token = token
+  setAuth(state, auth) {
+    state.auth = auth
   },
   setUsername(state, username) {
     state.username = username
@@ -64,4 +73,4 @@ export const mutations = {
   setMuscle(state, muscle) {
     state.muscle = muscle
   }
-}
+};

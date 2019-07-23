@@ -21,7 +21,7 @@
   </v-jumbotron>
 
 
-  <div class="d-flex justify-between align-center mb-3">
+  <!-- <div class="d-flex justify-between align-center mb-3">
       <v-btn @click="all">Check all week!</v-btn>
       <v-btn @click="none">Close Em'</v-btn>
   </div>
@@ -42,14 +42,14 @@
       </template>
          <v-card>
               <v-card-text>
-                 <h4>{{muscle[2].schedule[i].bodyPart}}</h4>
+                 <h4>{{muscle[2].schedule[i].bodyPart}}</h4> -->
                  <!-- <div
                             :key="j"
                             v-for="(workout, j) in muscle[2].schedule[i].workouts[j]"
                             class="my-1"
                         >{{ workout }}</div> -->
-              </v-card-text>
-          </v-card>
+              <!-- </v-card-text>
+          </v-card> -->
           <!-- <v-card>
               <v-card-text>
                   {{muscle[2].schedule[i].bodyPart]}}
@@ -60,14 +60,13 @@
                   {{muscle[2].schedule[i].workouts}}
               </v-card-text>
           </v-card> -->
-    </v-expansion-panel-content>
+    <!-- </v-expansion-panel-content>
   </v-expansion-panel>
-  </div>
-
+  </div> -->
+</div>
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
   data() {
@@ -88,18 +87,13 @@ export default {
       }
     },
   created() {
-        const headers = {
-            "Authorization": this.$store.state.token,
-            'Content-Type': 'application/x-www-form-urlencoded'
-        };
-        let email = this.$store.state.email;
-        axios.post('http://localhost:8081/getmuscle',{
-          email: email
-        }, {headers: headers})
+        let username = this.$store.state.username;
+        this.$axios.post('/api/getmuscle', {
+          username: this.username
+        }, {headers: {Authorization: this.$store.state.token}})  
         .then((response) => {
             console.log(response.data);
             this.muscle = response.data;
-
             this.$store.commit('setMuscle', response.data);
         }).catch((error) => {
             console.log(error);

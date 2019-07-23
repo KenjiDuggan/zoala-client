@@ -1,6 +1,6 @@
 <template>
     <div id="registerplan">
-        <h1 class="my-2 subheading secondary--text text-uppercase">Register your weekly plan to get THICK</h1>
+        <h1 class="my-2 subheading secondary--text text-uppercase">Register your weekly plan to get gainz</h1>
         <v-container class="my-5">
             <h1 class="primary--text text-xs-center text-uppercase">General Information</h1>
             <v-card color="primary ma-5 px-3 py-5">
@@ -36,17 +36,13 @@
                                 v-model="day.bodyPart"
                                 label="Body Part"
                             ></v-text-field>
-
                             <v-text-field
                                 color="background"
-                                v-model="workoutPlaceholders[i]"
-                                label="Workout"
-                                @keyup.enter="addWorkout(day.workouts, workoutPlaceholders[i])"
+                                v-model="musclePlaceholders[i]"
+                                label="Exercises"
+                                @keyup.enter="addMuscle(day.workouts, musclePlaceholders[i])"
                                 hint="Press enter to continue"
-                                @click="deleteWorkout"
                             ></v-text-field>
-
-
                             <v-card-text class="px-4 text-xs-left">
                                 <ul :style="{listStyle: 'none'}">
                                     <li
@@ -71,13 +67,14 @@
 </template>
 
 <script>
+// import {api} from '../plugins/axios.js';
 
 export default {
     data() {
         return {
             name: "",
             description: "",
-            workoutPlaceholders: ["", "", "", "", "", "", ""],
+            musclePlaceholders: ["", "", "", "", "", "", ""],
             days: [
                 {
                     day: "monday",
@@ -117,29 +114,42 @@ export default {
         };
     },
     methods: {
-        addWorkout(array, item) {
+        addMuscle(array, item) {
             array.push(item);
-            this.workoutPlaceholders = ["", "", "", "", "", "", ""];
+            this.musclePlaceholders = ["", "", "", "", "", "", ""];
         },
         sendMuscle() {
-            this.$axios
-                .post("/muscle", {
-                    name: this.name,
-                    description: this.description,
-                    days: this.days,
-                    username: this.$store.state.username,
-                })
-                .then(
-                    setTimeout(() => {
-                        this.$router.push(
-                            "/muscle"
-                        );
-                    }, 200)
-                );
+            // console.log(this.$store.state.token);
+            // this.$axios
+            //     .post("/muscle", {
+            //         name: this.name,
+            //         description: this.description,
+            //         days: this.days,
+            //         username: this.$store.state.username,
+            //     })
+            //     .then(
+            //         setTimeout(() => {
+            //             this.$router.push(
+            //                 "/muscle"
+            //             );
+            //         }, 200)
+            //     );
+       
+        let token = this.$store.state.auth
+        let username = this.$store.state.username;
+        this.$axios.post('/api/muscle', {
+          name: this.name,
+          description: this.description,
+          days: this.days,
+          username: username
+        },  {headers: {Authorization: this.$store.state.token}})
+        .then((response) => {
+            console.log(response.data);
+            this.$router.push('/inspire');
+        }).catch((error) => {
+            console.log(error);
+        });
         }
-    }
+    },
 };
 </script>
-
-<style>
-</style>

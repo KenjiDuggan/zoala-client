@@ -53,6 +53,8 @@
 <script>
 import Notification from '../components/Notification';
 const Cookie = process.client ? require('js-cookie') : undefined;
+import {api} from '../plugins/axios.js';
+
 export default {
   components: {
     Notification
@@ -98,7 +100,7 @@ export default {
     },
     async register() {
           try{
-            await this.$axios.post('register', {
+            await axios.post('/auth/register', {
               username: this.username,
               email: this.email,
               password: this.password

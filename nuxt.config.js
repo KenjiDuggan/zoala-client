@@ -55,24 +55,16 @@ module.exports = {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-
   axios: {
-    baseURL: 'http://localhost:8081/',
-    requestInterceptor: ($axios, { store }) => {
-      $axios.headers.common['Authorization'] = store.state.token
-      $axios.headers.common['access-token'] = store.state.token
-      $axios.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
-      return $axios
-    },
-    responseInterceptor: (res, ctx) => { }
+    baseURL: 'http://localhost:8081'
   },
 
   auth: {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'data' },
-          user: { url: 'me', method: 'get', propertyName: 'data' },
+          login: { url: 'auth/login', method: 'post', propertyName: 'data' },
+          user: { url: 'auth/me', method: 'get', propertyName: 'data' },
           logout: false
         }
       }
@@ -103,13 +95,15 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
+
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
+           
         })
       }
     }

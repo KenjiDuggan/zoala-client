@@ -35,7 +35,8 @@
 
 <script>
 import Notification from '../components/Notification';
-// const Cookie = process.client ? require('js-cookie') : undefined;
+const Cookie = process.client ? require('js-cookie') : undefined;
+// import {api} from "../plugins/axios.js";
 
 export default {
   middleware: 'guest',
@@ -71,22 +72,24 @@ export default {
     resetValidation() {
       this.$refs.form.resetValidation()
     },
-    async login() {
+    async login({store}) {
       try {
-        const response = await this.$axios.post('login', {
+
+        const response = await this.$axios.post('/auth/login', {
             email: this.email,
             password: this.password
-          })
-          this.response = response;
-          console.log(response.user);
-
+          },)
+           
+          console.log(response.data);
+    
           if(response.data.token){
             this.$auth.setToken('local', response.data.token)
             this.$store.state.email = this.email;
             this.$store.state.username = response.data.username;
-            this.$store.commit('setAuth', response.data.token);
-            console.log(this.$store.state.token);
+            Cookie.set('auth', response.data.token);
+            this.$store.state.token = response.data.token;
           }
+          
           await this.$auth.loginWith('local', {
             data: {
               email: this.email,

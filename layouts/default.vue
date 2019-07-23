@@ -76,6 +76,7 @@
 
 <script>
 const Cookie = process.client ? require('js-cookie') : undefined;
+
 import {mapGetters} from 'vuex';
 export default {
   data() {
@@ -132,11 +133,12 @@ export default {
     ...mapGetters(['isAuthenticated', 'loggedInUser'])
   },
   methods: {
-    async logout() {
-    await this.$auth.logout()
-    Cookie.remove('auth')
-    this.$store.commit('setAuth', null);
+    logout() {
+       
+      Cookie.remove('auth')
+      this.$store.commit('setAuth', null)
+    }
   },
-},
 }
+
 </script>
