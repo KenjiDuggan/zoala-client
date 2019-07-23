@@ -1,68 +1,49 @@
 <template>
 <div>
-  <v-jumbotron>
     <v-container fill-height>
       <v-layout align-center>
         <v-flex>
-          <h3 class="display-3">Weekly Workout</h3>
-          <span class="subheading">Get ThiKK or go home! </span>
-          <v-divider class="my-3"></v-divider>
-          <div class="title mb-3">Add New Weekly Workout Routine</div>
-          <nuxt-link to="/addmuscle"><v-btn
-            class="mx-0"
+          <h3 class="display-3">Weekly Gainz</h3><div>   </div><nuxt-link to="/addmuscle"><v-btn
+            class="mx-0 rounded-corners secondary info--text"
             color="primary"
             large
           >
             Add Workout
           </v-btn></nuxt-link>
+          <v-divider class="my-3"></v-divider>
         </v-flex>
       </v-layout>
     </v-container>
-  </v-jumbotron>
 
-
-  <!-- <div class="d-flex justify-between align-center mb-3">
-      <v-btn @click="all">Check all week!</v-btn>
-      <v-btn @click="none">Close Em'</v-btn>
+ 
+ 
+  <h1>{{muscle[1].name}}</h1>
+  <v-divider></v-divider>
+  <h3>{{muscle[1].description}}</h3>
+  <br/>
+   <div class="d-flex justify-between align-center mb-3">
+      <v-btn  class="info--text accent rounded-corners" @click="all">Check all week!</v-btn>
+      <v-btn class="info--text accent rounded-corners" @click="none">Close Em'</v-btn>
   </div>
-
-
-  <h2>{{muscle[2].name}}</h2>
-  <v-divider></v-divider>
-  <h3>{{muscle[2].description}}</h3>
-  <v-divider></v-divider>
-
-   <v-expansion-panel>
+   <v-expansion-panel v-model="panel">
     <v-expansion-panel-content
+    class="rounded-corner secondary"
       v-for="(item,i) in 6"
       :key="i"
     >
       <template v-slot:header>
-        <div>{{muscle[2].schedule[i].day}}</div>
+        <div class="info--text">{{muscle[1].schedule[i].day.toUpperCase()}}</div>
       </template>
          <v-card>
               <v-card-text>
-                 <h4>{{muscle[2].schedule[i].bodyPart}}</h4> -->
-                 <!-- <div
-                            :key="j"
-                            v-for="(workout, j) in muscle[2].schedule[i].workouts[j]"
-                            class="my-1"
-                        >{{ workout }}</div> -->
-              <!-- </v-card-text>
-          </v-card> -->
-          <!-- <v-card>
-              <v-card-text>
-                  {{muscle[2].schedule[i].bodyPart]}}
-              </v-card-text>
-          </v-card> -->
-          <!-- <v-card>
-              <v-card-text>
-                  {{muscle[2].schedule[i].workouts}}
-              </v-card-text>
-          </v-card> -->
-    <!-- </v-expansion-panel-content>
+                <h4>{{muscle[1].schedule[i].bodyPart}}</h4>
+                <div v-for="(jtem, j) in muscle[1].schedule[i].workouts.length" :key="j">{{muscle[1].schedule[i].workouts[j]}}</h4>     
+                </v-card-text>
+          </v-card> 
+          
+    </v-expansion-panel-content>
   </v-expansion-panel>
-  </div> -->
+  </div>
 </div>
 </template>
 
@@ -80,11 +61,11 @@ export default {
   },
    methods: {
       all () {
-        this.panel = [...Array(this.items).keys()].map(_ => true)
+        this.panel = [...Array(this.items).keys()].map((k, i) => true)
       },
       none () {
         this.panel = []
-      }
+      },
     },
   created() {
         let username = this.$store.state.username;
@@ -101,3 +82,4 @@ export default {
   }
 }
 </script>
+  </v-jumbotron>

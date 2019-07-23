@@ -33,7 +33,9 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    '@/assets/css/main.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
@@ -78,7 +80,7 @@ module.exports = {
     theme: {
       primary: '#747474',
       accent: '#90A4AE',
-      secondary: '#FFE400',
+      secondary: '#FFB300',
       info: '#424242',
       warning: '#FF652F',
       error: colors.deepOrange.accent4,

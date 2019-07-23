@@ -88,22 +88,22 @@ export default {
         {
           icon: 'offline_bolt',
           title: 'Inspiration',
-          to: '/inspire'
+          to: '/inspire',
         },
         {
           icon: 'fitness_center',
           title: 'Gains',
-          to: '/muscle'
+          to: '/muscle',
         },
         {
           icon: 'poll',
           title: 'Sleep',
-          to: '/sleep'
+          to: '/sleep',
         },
         {
           icon: 'mood',
           title: 'Profile',
-          to: '/profile'
+          to: '/profile',
         },
       ],
       usernots: [
@@ -134,9 +134,9 @@ export default {
   },
   methods: {
     logout() {
-       
       Cookie.remove('auth')
       this.$store.commit('setAuth', null)
+      this.$router.redirect('/');
     }
   },
 }

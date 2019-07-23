@@ -1,9 +1,8 @@
 <template>
-    <div id="registerplan">
-        <h1 class="my-2 subheading secondary--text text-uppercase">Register your weekly plan to get gainz</h1>
+    <div>
         <v-container class="my-5">
-            <h1 class="primary--text text-xs-center text-uppercase">General Information</h1>
-            <v-card color="primary ma-5 px-3 py-5">
+            <h1 class="secondary--text text-xs-center text-uppercase">General information</h1>
+            <v-card color="secondary ma-5 px-3 py-5 rounded-corners">
                 <v-form class="px-3">
                     <v-text-field
                         name="name"
@@ -23,13 +22,14 @@
                     ></v-text-field>
                 </v-form>
             </v-card>
-            <v-card class="background pa-4 text-xs-center" flat>
-                <h1 class="primary--text text-uppercase">Schedule</h1>
+            <v-card class="background pa-4 text-xs-center rounded-corners" flat>
+                <h1 class="secondary--text text-uppercase">Schedule</h1>
+                <br/>
                 <v-layout wrap row>
                     <v-flex v-for="(day, i) in days" :key="i" xs12 sm6 md4 lg3>
-                        <v-card class="primary text-xs-center ma-3 pa-3" flat>
+                        <v-card class="secondary text-xs-center ma-3 pa-3 rounded-corners" flat>
                             <v-card-title
-                                class="subtext1--text text-xs-center font-weight-medium text-uppercase"
+                                class="info--text text-xs-center font-weight-medium text-uppercase"
                             >{{ day.day }}</v-card-title>
                             <v-text-field
                                 color="background"
@@ -58,7 +58,7 @@
             </v-card>
             <div class="text-xs-center">
                 <v-btn
-                    class="primary mx-0 mt-5 background--text text-uppercase"
+                    class="secondary mx-0 mt-5 info--text text-uppercase rounded-corners"
                     @click="sendMuscle"
                 >Submit</v-btn>
             </div>
@@ -67,8 +67,6 @@
 </template>
 
 <script>
-// import {api} from '../plugins/axios.js';
-
 export default {
     data() {
         return {
@@ -119,22 +117,6 @@ export default {
             this.musclePlaceholders = ["", "", "", "", "", "", ""];
         },
         sendMuscle() {
-            // console.log(this.$store.state.token);
-            // this.$axios
-            //     .post("/muscle", {
-            //         name: this.name,
-            //         description: this.description,
-            //         days: this.days,
-            //         username: this.$store.state.username,
-            //     })
-            //     .then(
-            //         setTimeout(() => {
-            //             this.$router.push(
-            //                 "/muscle"
-            //             );
-            //         }, 200)
-            //     );
-       
         let token = this.$store.state.auth
         let username = this.$store.state.username;
         this.$axios.post('/api/muscle', {

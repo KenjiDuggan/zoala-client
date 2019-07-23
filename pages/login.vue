@@ -114,13 +114,5 @@ export default {
 </script>
 
 <style scoped>
-.rounded-corner{
-  border-radius: 15px;
-}
-.rounded-corners{
-  border-radius: 10px;
-}
-.to-lower{
-  text-transform: none !important;
-}
+
 </style>
