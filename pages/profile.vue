@@ -1,16 +1,50 @@
-
 <template>
-  <div>
-    <v-container class="primary--text success"> 
-      <v-flex>
-      <h1>welcome {{this.$store.state.username}}</h1>
-      <br/>
-      <v-divider></v-divider>
-      <h3>Email: {{this.$store.state.email}}</h3>
-      <h3>Token: {{this.$store.state.token}}</h3>
-      </v-flex>
-    </v-container>
-  </div>
+  <v-card
+    class="mx-auto"
+    max-width="1000"
+  >
+    <img
+      class="white--text"
+      height="300px"
+      src='~assets/anonym.jpg'
+    >
+    </img>
+
+    <v-card-text>
+      
+      <span class="text--primary">
+        <span>Email: {{this.$store.state.email}}</span><br>
+        <span>Token: {{this.$store.state.token}}</span>
+      </span>
+    </v-card-text>
+
+    <v-card-actions class="text-xs-center">
+      <v-btn
+        text
+        color="secondary"
+      >
+        gainz
+      </v-btn>
+      <v-btn
+        text
+        color="success"
+      >
+        cardio
+      </v-btn>
+       <v-btn
+        text
+        color="warning"
+      >
+        food
+      </v-btn>
+       <v-btn
+        text
+        color="accent"
+      >
+        sleep
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
