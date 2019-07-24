@@ -2,6 +2,11 @@
 
 > Nuxtjs Vue Vuex Vuetify Frontend
 
+# Demo Images 
+### For demo purposes the RestAPI-Auth-zoala repo's backend is used
+
+
+
 ## Build Setup
 
 ``` bash
