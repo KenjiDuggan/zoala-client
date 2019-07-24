@@ -3,10 +3,17 @@
 > Nuxtjs Vue Vuex Vuetify Frontend
 
 # Demo Images 
-### For demo purposes the RestAPI-Auth-zoala repo's backend is used
+#### (For demo purposes the RestAPI-Auth-zoala repo's backend is used)
+
+![Home Page](readme-images/homepage.png)
+![Register Page](readme-images/register.png)
+![Login Page](readme-images/login.png)
+![addMuscle Page](readme-images/getworkout.png)
+![postMuscle Page](readme-images/postworkout.png)
 
 
-
+## There's more features to come!!
+### Coming up(sleep, cardio, food, etc.)
 ## Build Setup
 
 ``` bash
