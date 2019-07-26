@@ -10,6 +10,8 @@
 ![Login Page](readme-images/login.png)
 ![addMuscle Page](readme-images/getworkout.png)
 ![postMuscle Page](readme-images/postworkout.png)
+![getSleep Page](readme-images/getsleep.png)
+![postSleep Page](readme-images/postsleep.png)
 
 
 ## There's more features to come!!
