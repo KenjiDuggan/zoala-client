@@ -1,5 +1,3 @@
-
-
 .rounded-corner{
   border-radius: 15px;
 }
@@ -9,11 +7,6 @@
 .to-lower{
   text-transform: none !important;
 }
-
-.inspire_link{
-    color: #DD2C00;
-}
-
 /* //colors
 //accent: light-grey-blue
 //warning: 
