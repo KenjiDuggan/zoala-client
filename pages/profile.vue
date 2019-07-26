@@ -55,5 +55,10 @@ export default {
     ...mapGetters(['isAuthenticated', 'loggedInUser']),
   },
   middleware: 'auth',
+  methods: {
+    new() {
+      console.log(this.$store.state.token);
+    }
+  }
 };
 </script>

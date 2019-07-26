@@ -8,6 +8,9 @@ export const getters = {
   loggedInUser(state) {
     return state.auth.user
   },
+  token(state) {
+    return state.token
+  },
   muscle(state) {
     return state.muscle
   },

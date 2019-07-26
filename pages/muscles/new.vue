@@ -114,26 +114,19 @@ export default {
             ],
         };
     },
-    computed:{
-        ...mapState(
-            {token: state => state.token}
-        )
-    },
     methods: {
         addMuscle(array, item) {
             array.push(item);
             this.musclePlaceholders = ["", "", "", "", "", "", ""];
         },
         sendMuscle() {
-        console.log(this.token);
-        let token = token;
         let username = this.$store.state.username;
         this.$axios.post('/api/muscle', {
           name: this.name,
           description: this.description,
           days: this.days,
           username: username
-        },  {headers: {authorization: 'bearer ' + token}})
+        }, {headers: {Authorization: 'Bearer ' + this.$store.state.token}})
         .then((response) => {
             console.log(response.data);
             this.$router.push('/inspire');
@@ -142,6 +135,6 @@ export default {
         });
         }
     },
-
+    middleware: 'auth'
 };
 </script>
