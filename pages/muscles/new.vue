@@ -67,9 +67,12 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
+
 export default {
     data() {
         return {
+            token: null,
             name: "",
             description: "",
             musclePlaceholders: ["", "", "", "", "", "", ""],
@@ -111,20 +114,26 @@ export default {
             ],
         };
     },
+    computed:{
+        ...mapState(
+            {token: state => state.token}
+        )
+    },
     methods: {
         addMuscle(array, item) {
             array.push(item);
             this.musclePlaceholders = ["", "", "", "", "", "", ""];
         },
         sendMuscle() {
-        let token = this.$store.state.auth
+        console.log(this.token);
+        let token = token;
         let username = this.$store.state.username;
         this.$axios.post('/api/muscle', {
           name: this.name,
           description: this.description,
           days: this.days,
           username: username
-        },  {headers: {Authorization: this.$store.state.token}})
+        },  {headers: {authorization: 'bearer ' + token}})
         .then((response) => {
             console.log(response.data);
             this.$router.push('/inspire');
@@ -133,5 +142,6 @@ export default {
         });
         }
     },
+
 };
 </script>

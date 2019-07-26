@@ -7,8 +7,8 @@
       class="white--text"
       height="300px"
       src='~assets/anonym.jpg'
-    >
-    </img>
+    />
+ 
 
     <v-card-text>
       

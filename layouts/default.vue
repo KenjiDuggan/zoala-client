@@ -87,39 +87,39 @@ export default {
       useractives: [
         {
           icon: 'offline_bolt',
-          title: 'Inspiration',
+          title: 'inspiration',
           to: '/inspire',
         },
         {
           icon: 'fitness_center',
-          title: 'Gains',
-          to: '/muscle',
+          title: 'muscles',
+          to: '/muscles',
         },
         {
           icon: 'poll',
-          title: 'Sleep',
-          to: '/sleep',
+          title: 'sleep',
+          to: '/sleeps',
         },
         {
           icon: 'mood',
-          title: 'Profile',
+          title: 'profile',
           to: '/profile',
         },
       ],
       usernots: [
                 {
           icon: 'apps',
-          title: 'Welcome',
+          title: 'welcome',
           to: '/'
         },
         {
           icon: 'person_add',
-          title: 'Register',
+          title: 'register',
           to: '/register'
         },
         {
           icon: 'exit_to_app',
-          title: 'Login',
+          title: 'login',
           to: '/login'
         },
       ],

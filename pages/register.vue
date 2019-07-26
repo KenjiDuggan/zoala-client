@@ -100,7 +100,7 @@ export default {
     },
     async register() {
           try{
-            await axios.post('/auth/register', {
+            await this.$axios.post('/auth/register', {
               username: this.username,
               email: this.email,
               password: this.password

@@ -1,8 +1,6 @@
 
 const cookieparser = process.server ? require('cookieparser') : undefined
 
-import Vuex from 'vuex'
-
 export const getters = {
   isAuthenticated(state) {
     return state.auth.loggedIn
@@ -13,6 +11,15 @@ export const getters = {
   muscle(state) {
     return state.muscle
   },
+  cardio(state) {
+    return state.cardio
+  },
+  sleep(state) {
+    return state.sleep
+  },
+  food(state) {
+    return state.food
+  },
   email(state) {
     return state.email
   },
@@ -22,7 +29,7 @@ export const getters = {
   auth(state) {
     return state.auth
   }
-};
+}
 
 export const state = () => ({
   auth: null,
@@ -30,8 +37,11 @@ export const state = () => ({
   username: null,
   password: null,
   muscle: null,
-  token: null,
-});
+  cardio: null,
+  sleep: null,
+  food: null,
+  token: null
+})
 
 export const actions = {
   nuxtServerInit({ commit }, { req }) {
@@ -54,11 +64,19 @@ export const actions = {
   setMuscle({ commit }, muscle) {
     commit('setMuscle', muscle)
   },
+  setCardio({ commit }, cardio) {
+    commit('setCardio', cardio)
+  },
+  setSleep({ commit }, sleep) {
+    commit('setSleep', sleep)
+  },
+  setFood({ commit }, food) {
+    commit('setSleep', food)
+  },
   setAuth({ commit }, auth) {
     commit('setAuth', auth)
   }
-};
-
+}
 
 export const mutations = {
   setAuth(state, auth) {
@@ -72,5 +90,14 @@ export const mutations = {
   },
   setMuscle(state, muscle) {
     state.muscle = muscle
+  },
+  setCardio(state, cardio) {
+    state.cardio = cardio
+  },
+  setSleep(state, sleep) {
+    state.sleep = sleep
+  },
+  setFood(state, food) {
+    state.food = food
   }
-};
+}
