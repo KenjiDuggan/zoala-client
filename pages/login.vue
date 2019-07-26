@@ -36,7 +36,6 @@
 <script>
 import Notification from '../components/Notification';
 const Cookie = process.client ? require('js-cookie') : undefined;
-// import {api} from "../plugins/axios.js";
 
 export default {
   middleware: 'guest',
@@ -104,6 +103,7 @@ export default {
             console.log(e);
           })
         this.$router.push('/')
+        
       } catch (e) {
         this.error = e.response;
         console.log(e);

@@ -129,7 +129,7 @@ export default {
         }, {headers: {Authorization: 'Bearer ' + this.$store.state.token}})
         .then((response) => {
             console.log(response.data);
-            this.$router.push('/inspire');
+            this.$router.push('/muscles');
         }).catch((error) => {
             console.log(error);
         });

@@ -1,5 +1,3 @@
-const colors = require('vuetify/es5/util/colors').default
-
 module.exports = {
   mode: 'spa',
   /*
@@ -83,7 +81,7 @@ module.exports = {
       secondary: '#FFB300',
       info: '#424242',
       warning: '#FF652F',
-      error: colors.deepOrange.accent4,
+      error: '#42A5F5',
       success: '#14A76C'
     },
     icons: true,

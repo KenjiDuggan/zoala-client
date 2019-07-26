@@ -92,8 +92,18 @@ export default {
         },
         {
           icon: 'fitness_center',
-          title: 'muscles',
+          title: 'gainz',
           to: '/muscles',
+        },
+        {
+          icon: 'directions_bike',
+          title: 'heart',
+          to: '/cardios'
+        },
+        {
+          icon: 'local_grocery_store',
+          title: 'nourri',
+          to: '/foods'
         },
         {
           icon: 'poll',
