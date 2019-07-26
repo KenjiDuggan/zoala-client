@@ -1,3 +1,5 @@
 <template>
-    <h1>Where your sleep is going to be displayed...coming soon!</h1>
+    <div>
+        <v-btn><nuxt-link to="/sleeps/new/">Sleep</nuxt-link></v-btn>
+    </div>
 </template>
