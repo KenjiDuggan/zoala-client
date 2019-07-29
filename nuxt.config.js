@@ -105,6 +105,10 @@ module.exports = {
           exclude: /(node_modules)/       
         })
       }
-    }
-  }
+    },
+    vendor: ["vue2-google-maps"]
+  },
+  plugins: [
+    {src: "~/plugins/vue2-google-maps.js"}
+  ]
 }
