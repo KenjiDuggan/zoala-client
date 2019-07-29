@@ -5,7 +5,7 @@
       <v-flex>
         <h3 class="display-3">Weekly Cardio</h3><nuxt-link to="/cardios/new"><v-btn
           class="mx-0 rounded-corners secondary info--text"
-          color="primary"
+          color="success"
           large
         ><v-icon>playlist_add</v-icon>
             Add Cardio Plan
@@ -101,5 +101,4 @@ export default {
             console.log(error);
         });
   },
-
 }

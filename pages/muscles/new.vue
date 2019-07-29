@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container class="my-5">
-            <h1 class="secondary--text text-xs-center text-uppercase">General information</h1>
+            <h1 class="secondary--text text-xs-center text-uppercase">Weekly Workout Info</h1>
             <v-card color="secondary ma-5 px-3 py-5 rounded-corners">
                 <v-form class="px-3">
                     <v-text-field
