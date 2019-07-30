@@ -11,6 +11,7 @@
       <v-list>
         <v-list-tile
           v-for="useractive in useractives"
+          :key="useractive.id"
           :to="useractive.to"
           router
           exact
@@ -36,6 +37,7 @@
        <v-list>
         <v-list-tile
           v-for="usernot in usernots"
+          :key="usernot.id"
           :to="usernot.to"
           router
           exact
@@ -85,6 +87,11 @@ export default {
       drawer: false,
       fixed: false,
       useractives: [
+         {
+          icon: 'check_circle',
+          title: 'Dailies',
+          to: '/goals',
+        },
         {
           icon: 'offline_bolt',
           title: 'inspiration',
@@ -144,9 +151,9 @@ export default {
   },
   methods: {
     logout() {
-      Cookie.remove('auth')
+      // Cookie.remove('auth')
       this.$store.commit('setAuth', null)
-      this.$router.redirect('/');
+      this.$router.redirect('/login');
     }
   },
 }

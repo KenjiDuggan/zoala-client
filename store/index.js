@@ -43,7 +43,8 @@ export const state = () => ({
   cardio: null,
   sleep: null,
   food: null,
-  token: null
+  token: null,
+  map: null
 })
 
 export const actions = {

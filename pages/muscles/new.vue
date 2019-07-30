@@ -21,7 +21,7 @@
                         required
                     ></v-text-field>
                 </v-form>
-            </v-card>
+            </v-card> 
             <v-card class="background pa-4 text-xs-center rounded-corners" flat>
                 <h1 class="secondary--text text-uppercase">Schedule</h1>
                 <br/>

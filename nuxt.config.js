@@ -40,7 +40,7 @@ module.exports = {
   plugins: [
     '~/plugins/axios',
     '~/plugins/vue-swal',
-    '~/plugins/maps.js'
+    '~plugins/vue2-google-maps'
   ],
   /*
    ** Nuxt.js modules
@@ -93,17 +93,15 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
-
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
+          include: [path.resolve(__dirname, './node_modules/vue2-google-maps')],
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
+          transpile: [/^vue2-google-maps($|\/)/]
         })
       }
     },
