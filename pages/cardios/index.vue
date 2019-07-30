@@ -14,54 +14,25 @@
       </v-flex>
     </v-layout>
   </v-container>
-  <!-- <div v-for="(ktem, k) in cardio.length" :key="k">
-    <h1>{{cardio[k].name}}</h1><v-divider></v-divider>
-    <h3>{{cardio[k].description}}</h3><br/>
-    <div class="d-flex justify-between align-center mb-3">
-      <v-btn  class="info--text accent rounded-corners" @click="all" >Check all week!</v-btn>
-      <v-btn class="info--text accent rounded-corners" @click="none">Close Em'</v-btn>
-    </div>
-    <v-expansion-panel v-model="panel">
-      <v-expansion-panel-content class="rounded-corner secondary" v-for="(item,i) in 6" :key="i">
-        <template v-slot:header>
-          <div class="info--text">{{cardio[k].schedule[i].day.toUpperCase()}}</div>
-        </template>
-        <v-card>
-          <v-card-text>
-            <h4>{{cardio[k].schedule[i].bodyPart}}</h4>
-            <div v-for="(jtem, j) in cardio[k].schedule[i].workouts.length" :key="j">{{cardio[k].schedule[i].workouts[j]}} </div>
-          </v-card-text>
-        </v-card> 
-      </v-expansion-panel-content>
-    </v-expansion-panel>
-  </div> -->
     <v-container fill-height align-content-center>
         <v-layout align-center>
             <v-flex>
+                <div>{{this.map}}</div>
                 <h1>Going for a trip outdoors? Let's try a new trail!</h1>
                 <br/>
-                <GmapMap
-                :center="{lat:10, lng:10}"
-                :zoom="7"
-                map-type-id="terrain"
-                style="width: 500px; height: 300px"
-                >
-                <GmapMarker
-                    :key="index"
-                    v-for="(m, index) in markers"
-                    :position="m.position"
-                    :clickable="true"
-                    :draggable="true"
-                    @click="center=m.position"
-                />
-                </GmapMap>
+                  <GmapMap
+                    :center="{lat:10, lng:10}"
+                    :zoom="7"
+                    map-type-id="terrain"
+                    style="width: 700px; height: 450px"
+                    />
             </v-flex>
         </v-layout>
     </v-container>
-
 </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -70,10 +41,28 @@ export default {
       jtems: 24,
       ktems: 4,
       panel: [],
-      length: 3
+      length: 3,
+      map: "",
     };
   },
   methods: {
+      getRoute: function () {
+        this.directionsService = new google.maps.DirectionsService()
+        this.directionsDisplay = new google.maps.DirectionsRenderer()
+        this.directionsDisplay.setMap(this.$refs.trip.$mapObject)
+        var vm = this
+        vm.directionsService.route({
+            origin: this.coords,
+            destination: this.destination,
+            travelMode: 'LEGS'
+        }, function (response, status) {
+            if (status === 'OK') {
+            vm.directionsDisplay.setDirections(response)
+            } else {
+            console.log('Directions request failed due to ' + status);
+            }
+        })
+    },
       all () {
         this.panel = [...Array(this.items).keys()].map((k, i) => true)
       },
@@ -100,5 +89,8 @@ export default {
         }).catch((error) => {
             console.log(error);
         });
+
+        const map = axios.get('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyBMzW7cjf-pnPGYZocIg25J5zE-9kUUrjM')
+        this.map = map;
   },
 }

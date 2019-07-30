@@ -39,7 +39,8 @@ module.exports = {
    */
   plugins: [
     '~/plugins/axios',
-    '~/plugins/vue-swal'
+    '~/plugins/vue-swal',
+    '~/plugins/maps.js'
   ],
   /*
    ** Nuxt.js modules
@@ -102,13 +103,10 @@ module.exports = {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/       
+          exclude: /(node_modules)/
         })
       }
     },
-    vendor: ["vue2-google-maps"]
-  },
-  plugins: [
-    {src: "~/plugins/vue2-google-maps.js"}
-  ]
+    vendor: ['vue2-google-maps']
+  }
 }
