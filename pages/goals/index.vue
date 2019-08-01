@@ -10,30 +10,45 @@
             slot="header"
           >
             <v-tabs
-              v-model="tabs"
-              color="transparent"
-              slider-color="white"
+              v-model="tab"
+              fixed-tabs
             >
-              <span
-                class="subheading font-weight-light mr-3"
-                style="align-self: center"
-              >Tasks:</span>
-              <v-tab v-model="daily">
-                Daily
-              </v-tab>
-              <v-tab v-model="urgent">
-                Urgent
-              </v-tab>
-              <v-tab v-model="ongoing">
-                Ongoing
-              </v-tab>
-              <v-tab v-model="health">
-                Health
+              <v-tabs-slider color="amber darken-3" />
+              <v-tab
+                v-for="(item, index) in items"
+                :key="item"
+                :class="{active: currentTab === index}"
+                @click="currentTab = index"
+              >
+                {{ item }}
               </v-tab>
             </v-tabs>
           </v-flex>
-
-          <v-tabs-items v-model="tabs">
+          <v-tabs-items v-model="tab">
+            <v-card flat>
+              <div v-show="currentTab === 0">
+                <v-card-text v-for="item in dailies" :key="item.title">
+                  {{ item.title }}
+                </v-card-text>
+              </div>
+              <div v-show="currentTab === 1">
+                <v-card-text v-for="item in ongoings" :key="item.title">
+                  {{ item.title }}
+                </v-card-text>
+              </div>
+              <div v-show="currentTab === 2">
+                <v-card-text v-for="item in urgents" :key="item.title">
+                  {{ item.title }}
+                </v-card-text>
+              </div>
+              <div v-show="currentTab === 3">
+                <v-card-text v-for="item in healths" :key="item.title">
+                  {{ item.title }}
+                </v-card-text>
+              </div>
+            </v-card>
+          </v-tabs-items>
+          <!-- <v-tabs-items v-model="tabs">
             <v-tab-item
               v-for="n in 3"
               :key="n"
@@ -199,7 +214,7 @@
                 </v-list-tile>
               </v-list>
             </v-tab-item>
-          </v-tabs-items>
+          </v-tabs-items> -->
         </material-card>
       </v-flex>
     </v-container>
@@ -221,47 +236,67 @@
                   {{ day }}, {{ date }}{{ ord }} {{ year }}
                 </v-subheader>
                 <v-spacer />
-                <p class="text-xs-right">
-                  <b>
-                    {{ todos.length }}
-                  </b>
-                  Tasks
-                </p>
-                <v-flex xs12>
-                  <v-text-field v-model="newTodo" clearable name="newTodo" label="Type your task" @keyup.enter="addTodo" />
-                </v-flex>
+                <v-select
+                  v-model="selected"
+                  :items="items"
+                  label="Type of task"
+                />
+                <div v-if="selected==='Dailie'">
+                  <v-flex xs12>
+                    <v-text-field v-model="newDailie" clearable name="newDailie" label="Task description" @keyup.enter="addDailie" />
+                  </v-flex>
+                </div>
+                <div v-else-if="selected==='Urgent'">
+                  <v-flex xs12>
+                    <v-text-field v-model="newUrgent" clearable name="newUrgent" label="Task description" @keyup.enter="addUrgent" />
+                  </v-flex>
+                </div>
+                <div v-else-if="selected==='Ongoing'">
+                  <v-flex xs12>
+                    <v-text-field v-model="newOngoing" clearable name="newOngoing" label="Task description" @keyup.enter="addOngoing" />
+                  </v-flex>
+                </div>
+                <div v-else>
+                  <v-flex xs12>
+                    <v-text-field v-model="newHealth" clearable name="newHealth" label="Task description" @keyup.enter="addHealth" />
+                  </v-flex>
+                </div>
               </v-container>
-              <v-subheader v-if="todos.length == 0" class="subheading">
-                You have 0 Tasks, add some
-              </v-subheader>
-              <v-subheader v-else class="subheading">
-                Your Tasks
-              </v-subheader>
-              <!-- <div v-for="(todo, i) in todos" :key="todo.id">
-                <v-list-tile avatar>
-                  <v-list-tile-action>
-                    <v-checkbox v-model="todo.done" />
-                  </v-list-tile-action>
-                  <v-list-tile-content>
-                    <v-list-tile-title
-                      class="title"
-                      :class="{
-                        done: todo.done
-                      }"
-                    >
-                    {{ todo.title | capitalize }}
-                    </v-list-tile-title>
-                    <v-list-tile-sub-title>
-                      Added on: {{ date }}{{ ord }} {{ day }} {{ year }}
-                    </v-list-tile-sub-title>
-                  </v-list-tile-content>
-                  <v-btn v-if="todo.done" icon ripple color="red" @click="removeTodo(i)">
-                    <v-icon class="white--text">
-                      close
-                    </v-icon>
-                  </v-btn>
-                </v-list-tile>
-              </div> -->
+              <div v-if="selected='Dailie'">
+                <v-subheader v-if="dailies.length == 0" class="subheading">
+                  You have 0 Tasks, add some
+                </v-subheader>
+                <v-subheader v-else class="subheading">
+                  Your Tasks
+                </v-subheader> // eslint-disable-next-line
+                <!-- <div v-for="(dailie, i) in dailies" :key="dailie.id">
+                  // eslint-disable-line
+                  // eslint-disable-line
+                  <v-list-tile avatar>
+                    <v-list-tile-action>
+                      <v-checkbox v-model="dailie.done" />
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                      <v-list-tile-title
+                        class="title"
+                        :class="{
+                          done: dailie.done
+                        }"
+                      >
+                        {{ dailie.title | capitalize }}
+                      </v-list-tile-title>
+                      <v-list-tile-sub-title>
+                        Added on: {{ date }}{{ ord }} {{ day }} {{ year }}
+                      </v-list-tile-sub-title>
+                    </v-list-tile-content>
+                    <v-btn v-if="dailie.done" icon ripple color="red" @click="removeDailie(i)">
+                      <v-icon class="white--text">
+                        close
+                      </v-icon>
+                    </v-btn>
+                  </v-list-tile>
+                </div> -->
+              </div>
             </v-list>
           </v-card>
         </v-flex>
@@ -280,16 +315,32 @@ export default {
   },
   data() {
     return {
+      currentTab: 0,
+      tab: null,
+      items: ['Dailie', 'Urgent', 'Ongoing', 'Health'],
       list: {
         0: false,
         1: false,
         2: false
       },
+      dailietruth: false,
+      ongoingtruth: false,
+      urgenttruth: false,
+      healthtruth: false,
+      selected: '',
       isDark: true,
       show: true,
-      newTodo: '',
-      todo: [],
-      todos: [],
+      newHealth: '',
+      newOngoing: '',
+      newUrgent: '',
+      dailies: [],
+      dailie: [],
+      urgents: [],
+      urgent: [],
+      ongoings: [],
+      ongoing: [],
+      healths: [],
+      health: [],
       day: this.todoDay(),
       date: new Date().getDate(),
       ord: this.nth(new Date().getDate()),
@@ -297,19 +348,61 @@ export default {
     }
   },
   methods: {
-    addTodo() {
-      const value = this.newTodo && this.newTodo.trim()
+    addDailie() {
+      const value = this.newDailie && this.newDailie.trim()
       if (!value) {
         return
       }
-      this.todos.push({
-        title: this.newTodo,
+      this.dailies.push({
+        title: this.newDailie,
         done: false
       })
-      this.newTodo = ''
+      this.newDailie = ''
     },
-    removeTodo(index) {
-      this.todos.splice(index, 1)
+    addUrgent() {
+      const value = this.newUrgent && this.newUrgent.trim()
+      if (!value) {
+        return
+      }
+      this.urgents.push({
+        title: this.newUrgent,
+        done: false
+      })
+      this.newUrgent = ''
+    },
+    addOngoing() {
+      const value = this.newOngoing && this.newOngoing.trim()
+      if (!value) {
+        return
+      }
+      this.ongoings.push({
+        title: this.newOngoing,
+        done: false
+      })
+      this.newOngoing = ''
+    },
+    addHealth() {
+      const value = this.newHealth && this.newHealth.trim()
+      if (!value) {
+        return
+      }
+      this.healths.push({
+        title: this.newHealth,
+        done: false
+      })
+      this.newHealth = ''
+    },
+    removeDailie(index) {
+      this.dailies.splice(index, 1)
+    },
+    removeUrgent(index) {
+      this.urgents.splice(index, 1)
+    },
+    removeOngoing(index) {
+      this.ongoings.splice(index, 1)
+    },
+    removeHealth(index) {
+      this.healths.splice(index, 1)
     },
     todoDay() {
       const d = new Date()
