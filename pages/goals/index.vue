@@ -2,6 +2,13 @@
   <div>
     <v-container>
       <v-flex>
+        <v-toolbar color="secondary" dark>
+          <v-toolbar-side-icon />
+          <v-toolbar-title class="headline text-xs-center">
+            List of Things To-Do
+          </v-toolbar-title>
+          <v-spacer />
+        </v-toolbar>
         <material-card
           class="card-tabs"
           color="secondary"
@@ -28,193 +35,86 @@
             <v-card flat>
               <div v-if="currentTab === 0" v-show="currentTab === 0">
                 <v-card-text v-for="item in dailies" :key="item.title">
-                  {{ item.title }}
+                  <b>{{ item.title }}</b>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                    <v-icon color="error">
+                      close
+                    </v-icon>
+                  </v-btn>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                    <v-icon color="error">
+                      done
+                    </v-icon>
+                  </v-btn>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                    <v-icon color="error">
+                      edit
+                    </v-icon>
+                  </v-btn>
                 </v-card-text>
               </div>
               <div v-else-if="currentTab === 1" v-show="currentTab === 1">
                 <v-card-text v-for="item in urgents" :key="item.title">
-                  {{ item.title }}
+                  <b>{{ item.title }}</b>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                    <v-icon color="error">
+                      close
+                    </v-icon>
+                  </v-btn>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                    <v-icon color="error">
+                      done
+                    </v-icon>
+                  </v-btn>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                    <v-icon color="error">
+                      edit
+                    </v-icon>
+                  </v-btn>
                 </v-card-text>
               </div>
               <div v-else-if="currentTab === 2" v-show="currentTab === 2">
                 <v-card-text v-for="item in ongoings" :key="item.title">
-                  {{ item.title }}
+                  <b>{{ item.title }}</b>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                    <v-icon color="error">
+                      close
+                    </v-icon>
+                  </v-btn>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                    <v-icon color="error">
+                      done
+                    </v-icon>
+                  </v-btn>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                    <v-icon color="error">
+                      edit
+                    </v-icon>
+                  </v-btn>
                 </v-card-text>
               </div>
               <div v-else-if="currentTab === 3" v-show="currentTab === 3">
                 <v-card-text v-for="item in healths" :key="item.title">
-                  {{ item.title }}
+                  <b>{{ item.title }}</b>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                    <v-icon color="error">
+                      close
+                    </v-icon>
+                  </v-btn>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                    <v-icon color="error">
+                      done
+                    </v-icon>
+                  </v-btn>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                    <v-icon color="error">
+                      edit
+                    </v-icon>
+                  </v-btn>
                 </v-card-text>
               </div>
             </v-card>
           </v-tabs-items>
-          <!-- <v-tabs-items v-model="tabs">
-            <v-tab-item
-              v-for="n in 3"
-              :key="n"
-            >
-              <v-list three-line>
-                <v-list-tile @click="complete(0)">
-                  <v-list-tile-action>
-                    <v-checkbox
-                      :value="list[0]"
-                      color="green"
-                    />
-                  </v-list-tile-action>
-                  <v-list-tile-title>
-                    Sign contract for "What are conference organized afraid of?"
-                  </v-list-tile-title>
-                  <div class="d-flex">
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="success"
-                        icon
-                      >
-                        <v-icon color="primary">
-                          pencil
-                        </v-icon>
-                      </v-btn>
-                      <span>Edit</span>
-                    </v-tooltip>
-
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="danger"
-                        icon
-                      >
-                        <v-icon color="error">
-                          close
-                        </v-icon>
-                      </v-btn>
-                      <span>Status</span>
-                    </v-tooltip>
-
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="danger"
-                        icon
-                      >
-                        <v-icon color="error">
-                          close
-                        </v-icon>
-                      </v-btn>
-                      <span>
-                        Close
-                      </span>
-                    </v-tooltip>
-                  </div>
-                </v-list-tile>
-                <v-divider />
-                <v-list-tile @click="complete(1)">
-                  <v-list-tile-action>
-                    <v-checkbox
-                      :value="list[1]"
-                      color="success"
-                    />
-                  </v-list-tile-action>
-                  <v-list-tile-title>
-                    Lines From Great Russian Literature? Or E-mails From My Boss?
-                  </v-list-tile-title>
-                  <div class="d-flex">
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="success"
-                        icon
-                      >
-                        <v-icon color="primary">
-                          pencil
-                        </v-icon>
-                      </v-btn>
-                      <span>Edit</span>
-                    </v-tooltip>
-
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="danger"
-                        icon
-                      >
-                        <v-icon color="error">
-                          close
-                        </v-icon>
-                      </v-btn>
-                      <span>Close</span>
-                    </v-tooltip>
-                  </div>
-                </v-list-tile>
-                <v-divider />
-                <v-list-tile @click="complete(2)">
-                  <v-list-tile-action>
-                    <v-checkbox
-                      :value="list[2]"
-                      color="success"
-                    />
-                  </v-list-tile-action>
-                  <v-list-tile-title>
-                    Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                  </v-list-tile-title>
-                  <div class="d-flex">
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="success"
-                        icon
-                      >
-                        <v-icon color="primary">
-                          pencil
-                        </v-icon>
-                      </v-btn>
-                      <span>Edit</span>
-                    </v-tooltip>
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <v-btn
-                        slot="activator"
-                        class="v-btn--simple"
-                        color="danger"
-                        icon
-                      >
-                        <v-icon color="error">
-                          close
-                        </v-icon>
-                      </v-btn>
-                      <span>Close</span>
-                    </v-tooltip>
-                  </div>
-                </v-list-tile>
-              </v-list>
-            </v-tab-item>
-          </v-tabs-items> -->
         </material-card>
       </v-flex>
     </v-container>
@@ -223,13 +123,6 @@
       <v-layout row justify-center class="ma-5">
         <v-flex>
           <v-card>
-            <v-toolbar color="secondary" dark>
-              <v-toolbar-side-icon />
-              <v-toolbar-title class="headline text-xs-center">
-                Today's List
-              </v-toolbar-title>
-              <v-spacer />
-            </v-toolbar>
             <v-list two-line subheader>
               <v-container>
                 <v-subheader class="headline">
@@ -263,7 +156,6 @@
                   </v-flex>
                 </div>
               </v-container>
-
               <div v-if="dailietruth">
                 <v-subheader v-if="dailies.length == 0" class="subheading">
                   You have 0 Tasks, add some
@@ -358,8 +250,6 @@ export default {
         done: false
       })
       this.newDailie = ''
-      console.log(this.dailies) // eslint-disable-line
-      console.log(this.selected) // eslint-disable-line
     },
     addUrgent() {
       const value = this.newUrgent && this.newUrgent.trim()
