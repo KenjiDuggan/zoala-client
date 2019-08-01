@@ -32,12 +32,12 @@
                 </v-card-text>
               </div>
               <div v-else-if="currentTab === 1" v-show="currentTab === 1">
-                <v-card-text v-for="item in ongoings" :key="item.title">
+                <v-card-text v-for="item in urgents" :key="item.title">
                   {{ item.title }}
                 </v-card-text>
               </div>
               <div v-else-if="currentTab === 2" v-show="currentTab === 2">
-                <v-card-text v-for="item in urgents" :key="item.title">
+                <v-card-text v-for="item in ongoings" :key="item.title">
                   {{ item.title }}
                 </v-card-text>
               </div>
@@ -240,7 +240,7 @@
                   v-model="selected"
                   :items="items"
                   label="Type of task"
-                  @click="selectTodo"
+                  @change="selectTodo"
                 />
                 <div v-if="dailietruth">
                   <v-flex xs12>
@@ -288,17 +288,12 @@
                   Your Tasks
                 </v-subheader>
               </div>
-              <div v-else-if="healthtruth">
+              <div v-else>
                 <v-subheader v-if="healths.length == 0" class="subheading">
                   You have 0 Tasks, add some
                 </v-subheader>
                 <v-subheader v-else class="subheading">
                   Your Tasks
-                </v-subheader>
-              </div>
-              <div v-else>
-                <v-subheader v-if="healths.length == 0" class="subheading">
-                  You have 0 Tasks, add some
                 </v-subheader>
               </div>
             </v-list>
@@ -431,17 +426,24 @@ export default {
     selectTodo() {
       if (this.selected === 'Dailie') {
         this.dailietruth = true
-      } else if (this.selected === 'Urgent') {
-        this.urgenttruth = true
-      } else if (this.selected === 'Ongoing') {
-        this.ongoingtruth = true
-      } else if (this.selected === 'Health') {
-        this.healthtruth = true
-      } else {
-        this.dailietruth = false
         this.urgenttruth = false
         this.ongoingtruth = false
         this.healthtruth = false
+      } else if (this.selected === 'Urgent') {
+        this.dailietruth = false
+        this.urgenttruth = true
+        this.ongoingtruth = false
+        this.healthtruth = false
+      } else if (this.selected === 'Ongoing') {
+        this.dailietruth = false
+        this.urgenttruth = false
+        this.ongoingtruth = true
+        this.healthtruth = false
+      } else if (this.selected === 'Health') {
+        this.dailietruth = false
+        this.urgenttruth = false
+        this.ongoingtruth = false
+        this.healthtruth = true
       }
     }
   }
