@@ -8,20 +8,21 @@
     </div>
   </div>
 </template>
+
 <script>
-import axios from 'axios'
-import { mapGetters } from 'vuex'
-const Cookie = process.client ? require('js-cookie') : undefined
+// import axios from 'axios'
+// import { mapGetters } from 'vuex'
+// const Cookie = process.client ? require('js-cookie') : undefined
 
-export default {
-  data() {
-    return {
-      workouts: null
-    }
-  },
-  computed: {
-    ...mapGetters(['isAuthenticated', 'loggedInUser'])
-  }
-}
+// export default {
+//   data() {
+//     return {
+//       workouts: null
+//     }
+//   },
+//   computed: {
+//     ...mapGetters(['isAuthenticated', 'loggedInUser'])
+//   }
+// }
 
-</script>
+// </script>

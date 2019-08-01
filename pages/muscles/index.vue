@@ -64,14 +64,14 @@ export default {
     }
   },
   created() {
-    const username = this.$store.state.username
+    // const username = this.$store.state.username
     this.$axios.get('/api/muscle', { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
       .then((response) => {
-        console.log(response.data)
         this.muscle = response.data
         this.$store.commit('setMuscle', response.data)
+        throw response.data
       }).catch((error) => {
-        console.log(error)
+        throw error
       })
   },
   methods: {

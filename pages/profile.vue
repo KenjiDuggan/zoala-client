@@ -72,7 +72,7 @@ export default {
   middleware: 'auth',
   methods: {
     new() {
-      console.log(this.$store.state.token)
+
     }
   }
 }

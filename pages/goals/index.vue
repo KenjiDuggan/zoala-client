@@ -237,7 +237,7 @@
               <v-subheader v-else class="subheading">
                 Your Tasks
               </v-subheader>
-              <div v-for="(todo, i) in todos" :key="todo.id">
+              <!-- <div v-for="(todo, i) in todos" :key="todo.id">
                 <v-list-tile avatar>
                   <v-list-tile-action>
                     <v-checkbox v-model="todo.done" />
@@ -249,7 +249,7 @@
                         done: todo.done
                       }"
                     >
-                      {{ todo.title | capitalize }}
+                    {{ todo.title | capitalize }}
                     </v-list-tile-title>
                     <v-list-tile-sub-title>
                       Added on: {{ date }}{{ ord }} {{ day }} {{ year }}
@@ -261,7 +261,7 @@
                     </v-icon>
                   </v-btn>
                 </v-list-tile>
-              </div>
+              </div> -->
             </v-list>
           </v-card>
         </v-flex>

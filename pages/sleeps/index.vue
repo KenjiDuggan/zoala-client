@@ -74,10 +74,9 @@ export default {
   middleware: 'auth',
   created() {
     // const username = this.$store.state.username
+
     this.$axios.get('/api/sleep', { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
       .then((response) => {
-        throw (response.data)
-        // this.sleep = response.data
         let tot = 0
         for (let i = 0; i < response.data.length; i++) {
           this.data[0].values.push(this.sleep[i].schedule[0].avgminute)
@@ -85,6 +84,8 @@ export default {
         }
         this.avg = tot / (response.data.length)
         this.$store.commit('setSleep', response.data)
+        throw (response.data)
+        // this.sleep = response.data
       }).catch((error) => {
         throw error
       })

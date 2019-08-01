@@ -61,12 +61,11 @@ export default {
       usernameRules: [
         v => !!v || 'Name is required',
         v => v && v.length <= 20,
-        v => v || 'Name must be less than 20 characters',
-
+        v => v || 'Name must be less than 20 characters'
       ],
       emailRules: [
         v => !!v || 'E-mail is required',
-        v => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+        v => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid' // eslint-disable-line 
       ],
       passwordRules: [
         v => !!v || 'Password is required'
@@ -97,17 +96,15 @@ export default {
           email: this.email,
           password: this.password
         })
-        console.log(response.data)
-
         if (response) {
           this.$store.state.email = this.email
           this.$store.state.username = response.data.username
         }
-
         this.$router.push('/login')
+        throw response.data
       } catch (e) {
         this.error = e.response
-        console.log(e)
+        throw e
       }
     }
   },

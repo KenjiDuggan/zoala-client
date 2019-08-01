@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 
 export default {
   data() {
@@ -145,10 +145,10 @@ export default {
         username: username
       }, { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
         .then((response) => {
-          console.log(response.data)
           this.$router.push('/muscles')
+          throw response
         }).catch((error) => {
-          console.log(error)
+          throw error
         })
     }
   },

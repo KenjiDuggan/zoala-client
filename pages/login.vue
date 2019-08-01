@@ -52,8 +52,8 @@ export default {
     return {
       valid: false,
       emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+        v => !!v || 'E-mail is required', // eslint-disable-line 
+        v => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid' // eslint-disable-line 
       ],
       passwordRules: [
         v => !!v || 'Password is required'
@@ -83,9 +83,6 @@ export default {
           email: this.email,
           password: this.password
         })
-
-        console.log(response.data)
-
         if (response.data.token) {
           this.$auth.setToken('local', response.data.token)
           this.$store.state.email = this.email
@@ -105,12 +102,11 @@ export default {
             this.$router.push('/')
           })
           .catch((e) => {
-            console.log(e)
+            throw e
           })
-        this.$router.push('/')
       } catch (e) {
         this.error = e.response
-        console.log(e)
+        throw e
       }
     }
   }
