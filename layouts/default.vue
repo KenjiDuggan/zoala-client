@@ -7,53 +7,57 @@
       fixed
       app
     >
-     <template v-if="isAuthenticated">
-      <v-list>
-        <v-list-tile
-          v-for="useractive in useractives"
-          :key="useractive.id"
-          :to="useractive.to"
-          router
-          exact
-        >
-          <v-list-tile-action>
-            <v-icon>{{ useractive.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="useractive.title" />
-          </v-list-tile-content>
-        </v-list-tile>
+      <template v-if="isAuthenticated">
+        <v-list>
+          <v-list-tile
+            v-for="useractive in useractives"
+            :key="useractive.id"
+            :to="useractive.to"
+            router
+            exact
+          >
+            <v-list-tile-action>
+              <v-icon>{{ useractive.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="useractive.title" />
+            </v-list-tile-content>
+          </v-list-tile>
           <v-list-tile @click="logout">
-          <v-list-tile-action>
-            <v-icon>flight_takeoff</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Skiirtt</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-       </v-list>
-       </template>
-       <template v-if="!isAuthenticated">
-       <v-list>
-        <v-list-tile
-          v-for="usernot in usernots"
-          :key="usernot.id"
-          :to="usernot.to"
-          router
-          exact
-        >
-          <v-list-tile-action>
-            <v-icon>{{ usernot.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="usernot.title" />
-          </v-list-tile-content>
-        </v-list-tile>
-       </v-list>
+            <v-list-tile-action>
+              <v-icon>flight_takeoff</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Skiirtt</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </template>
+      <template v-if="!isAuthenticated">
+        <v-list>
+          <v-list-tile
+            v-for="usernot in usernots"
+            :key="usernot.id"
+            :to="usernot.to"
+            router
+            exact
+          >
+            <v-list-tile-action>
+              <v-icon>{{ usernot.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="usernot.title" />
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
       </template>
     </v-navigation-drawer>
     <v-toolbar :clipped-left="clipped" fixed app>
-      <v-toolbar-side-icon @click="drawer = !drawer"><v-icon icon>menu</v-icon></v-toolbar-side-icon>
+      <v-toolbar-side-icon @click="drawer = !drawer">
+        <v-icon icon>
+          menu
+        </v-icon>
+      </v-toolbar-side-icon>
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon>{{ `chevron_${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
@@ -77,9 +81,9 @@
 </template>
 
 <script>
-const Cookie = process.client ? require('js-cookie') : undefined;
+// const Cookie = process.client ? require('js-cookie') : undefined;
 
-import {mapGetters} from 'vuex';
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -87,20 +91,20 @@ export default {
       drawer: false,
       fixed: false,
       useractives: [
-         {
+        {
           icon: 'check_circle',
           title: 'Dailies',
-          to: '/goals',
+          to: '/goals'
         },
         {
           icon: 'offline_bolt',
           title: 'inspiration',
-          to: '/inspire',
+          to: '/inspire'
         },
         {
           icon: 'fitness_center',
           title: 'gainz',
-          to: '/muscles',
+          to: '/muscles'
         },
         {
           icon: 'directions_bike',
@@ -115,16 +119,16 @@ export default {
         {
           icon: 'poll',
           title: 'sleep',
-          to: '/sleeps',
+          to: '/sleeps'
         },
         {
           icon: 'mood',
           title: 'profile',
-          to: '/profile',
-        },
+          to: '/profile'
+        }
       ],
       usernots: [
-                {
+        {
           icon: 'apps',
           title: 'welcome',
           to: '/'
@@ -138,7 +142,7 @@ export default {
           icon: 'exit_to_app',
           title: 'login',
           to: '/login'
-        },
+        }
       ],
       miniVariant: false,
       right: true,
@@ -153,9 +157,9 @@ export default {
     logout() {
       // Cookie.remove('auth')
       this.$store.commit('setAuth', null)
-      this.$router.redirect('/login');
+      this.$router.redirect('/login')
     }
-  },
+  }
 }
 
 </script>

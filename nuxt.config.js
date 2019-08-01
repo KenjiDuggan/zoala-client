@@ -98,13 +98,13 @@ module.exports = {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
-          include: [path.resolve(__dirname, './node_modules/vue2-google-maps')],
+          // include: [path.resolve(__dirname, './node_modules/vue2-google-maps')],
           loader: 'eslint-loader',
-          exclude: /(node_modules)/,
-          transpile: [/^vue2-google-maps($|\/)/]
+          exclude: /(node_modules)/
+          // transpile: [/^vue2-google-maps($|\/)/]
         })
       }
-    },
-    vendor: ['vue2-google-maps']
+    }
+    // vendor: ['vue2-google-maps']
   }
 }

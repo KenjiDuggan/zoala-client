@@ -1,49 +1,64 @@
 <template>
-  <v-card
-    class="mx-auto"
-    max-width="1000"
-  >
-    <img
-      class="white--text"
-      height="300px"
-      src='~assets/anonym.jpg'
-    />
- 
+  <v-card>
+    <v-toolbar flat color="primary" dark>
+      <v-toolbar-title>User Profile</v-toolbar-title>
+    </v-toolbar>
+    <v-tabs vertical>
+      <v-tab>
+        <v-icon left>
+          account_circle
+        </v-icon>
+        Reason
+      </v-tab>
+      <v-tab>
+        <v-icon left>
+          lock
+        </v-icon>
+        User Info
+      </v-tab>
+      <v-tab-item>
+        <v-card flat>
+          <v-card-text>
+            <p>
+              Sed aliquam ultrices mauris. Donec posuere vulputate arcu. Morbi ac felis. Etiam feugiat lorem non metus. Sed a libero.
+            </p>
 
-    <v-card-text>
-      
-      <span class="text--primary">
-        <span>Email: {{this.$store.state.email}}</span><br>
-        <span>Token: {{this.$store.state.token}}</span>
-      </span>
-    </v-card-text>
+            <p>
+              Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Aliquam lobortis. Aliquam lobortis. Suspendisse non nisl sit amet velit hendrerit rutrum.
+            </p>
 
-    <v-card-actions class="text-xs-center">
-      <v-btn
-        text
-        color="secondary"
-      >
-        gainz
-      </v-btn>
-      <v-btn
-        text
-        color="success"
-      >
-        cardio
-      </v-btn>
-       <v-btn
-        text
-        color="warning"
-      >
-        food
-      </v-btn>
-       <v-btn
-        text
-        color="accent"
-      >
-        sleep
-      </v-btn>
-    </v-card-actions>
+            <p class="mb-0">
+              Phasellus dolor. Fusce neque. Fusce fermentum odio nec arcu. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Phasellus blandit leo ut odio.
+            </p>
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+      <v-tab-item>
+        <v-card flat>
+          <v-card-text>
+            <p>
+              Morbi nec metus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Nunc sed turpis.
+            </p>
+
+            <p>
+              Suspendisse feugiat. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In hac habitasse platea dictumst. Fusce ac felis sit amet ligula pharetra condimentum.
+            </p>
+
+            <p>
+              Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Nam commodo suscipit quam. In consectetuer turpis ut velit. Sed cursus turpis vitae tortor. Aliquam eu nunc.
+            </p>
+
+            <p>
+              Etiam ut purus mattis mauris sodales aliquam. Ut varius tincidunt libero. Aenean viverra rhoncus pede. Duis leo. Fusce fermentum odio nec arcu.
+            </p>
+
+            <p class="mb-0">
+              Donec venenatis vulputate lorem. Aenean viverra rhoncus pede. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Fusce commodo aliquam arcu. Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi.
+            </p>
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs>
   </v-card>
 </template>
 
@@ -52,13 +67,13 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['isAuthenticated', 'loggedInUser']),
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
   },
   middleware: 'auth',
   methods: {
     new() {
-      console.log(this.$store.state.token);
+      console.log(this.$store.state.token)
     }
   }
-};
+}
 </script>
