@@ -26,22 +26,22 @@
           </v-flex>
           <v-tabs-items v-model="tab">
             <v-card flat>
-              <div v-show="currentTab === 0">
+              <div v-if="currentTab === 0" v-show="currentTab === 0">
                 <v-card-text v-for="item in dailies" :key="item.title">
                   {{ item.title }}
                 </v-card-text>
               </div>
-              <div v-show="currentTab === 1">
+              <div v-else-if="currentTab === 1" v-show="currentTab === 1">
                 <v-card-text v-for="item in ongoings" :key="item.title">
                   {{ item.title }}
                 </v-card-text>
               </div>
-              <div v-show="currentTab === 2">
+              <div v-else-if="currentTab === 2" v-show="currentTab === 2">
                 <v-card-text v-for="item in urgents" :key="item.title">
                   {{ item.title }}
                 </v-card-text>
               </div>
-              <div v-show="currentTab === 3">
+              <div v-else-if="currentTab === 3" v-show="currentTab === 3">
                 <v-card-text v-for="item in healths" :key="item.title">
                   {{ item.title }}
                 </v-card-text>
@@ -228,7 +228,7 @@
               <v-toolbar-title class="headline text-xs-center">
                 Today's List
               </v-toolbar-title>
-              <v-spacer />>
+              <v-spacer />
             </v-toolbar>
             <v-list two-line subheader>
               <v-container>
@@ -240,18 +240,19 @@
                   v-model="selected"
                   :items="items"
                   label="Type of task"
+                  @click="selectTodo"
                 />
-                <div v-if="selected==='Dailie'">
+                <div v-if="dailietruth">
                   <v-flex xs12>
                     <v-text-field v-model="newDailie" clearable name="newDailie" label="Task description" @keyup.enter="addDailie" />
                   </v-flex>
                 </div>
-                <div v-else-if="selected==='Urgent'">
+                <div v-else-if="urgenttruth">
                   <v-flex xs12>
                     <v-text-field v-model="newUrgent" clearable name="newUrgent" label="Task description" @keyup.enter="addUrgent" />
                   </v-flex>
                 </div>
-                <div v-else-if="selected==='Ongoing'">
+                <div v-else-if="ongoingtruth">
                   <v-flex xs12>
                     <v-text-field v-model="newOngoing" clearable name="newOngoing" label="Task description" @keyup.enter="addOngoing" />
                   </v-flex>
@@ -262,40 +263,43 @@
                   </v-flex>
                 </div>
               </v-container>
-              <div v-if="selected='Dailie'">
+
+              <div v-if="dailietruth">
                 <v-subheader v-if="dailies.length == 0" class="subheading">
                   You have 0 Tasks, add some
                 </v-subheader>
                 <v-subheader v-else class="subheading">
                   Your Tasks
-                </v-subheader> // eslint-disable-next-line
-                <!-- <div v-for="(dailie, i) in dailies" :key="dailie.id">
-                  // eslint-disable-line
-                  // eslint-disable-line
-                  <v-list-tile avatar>
-                    <v-list-tile-action>
-                      <v-checkbox v-model="dailie.done" />
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                      <v-list-tile-title
-                        class="title"
-                        :class="{
-                          done: dailie.done
-                        }"
-                      >
-                        {{ dailie.title | capitalize }}
-                      </v-list-tile-title>
-                      <v-list-tile-sub-title>
-                        Added on: {{ date }}{{ ord }} {{ day }} {{ year }}
-                      </v-list-tile-sub-title>
-                    </v-list-tile-content>
-                    <v-btn v-if="dailie.done" icon ripple color="red" @click="removeDailie(i)">
-                      <v-icon class="white--text">
-                        close
-                      </v-icon>
-                    </v-btn>
-                  </v-list-tile>
-                </div> -->
+                </v-subheader>
+              </div>
+              <div v-else-if="urgenttruth">
+                <v-subheader v-if="urgents.length == 0" class="subheading">
+                  You have 0 Tasks, add some
+                </v-subheader>
+                <v-subheader v-else class="subheading">
+                  Your Tasks
+                </v-subheader>
+              </div>
+              <div v-else-if="ongoingtruth">
+                <v-subheader v-if="ongoings.length == 0" class="subheading">
+                  You have 0 Tasks, add some
+                </v-subheader>
+                <v-subheader v-else class="subheading">
+                  Your Tasks
+                </v-subheader>
+              </div>
+              <div v-else-if="healthtruth">
+                <v-subheader v-if="healths.length == 0" class="subheading">
+                  You have 0 Tasks, add some
+                </v-subheader>
+                <v-subheader v-else class="subheading">
+                  Your Tasks
+                </v-subheader>
+              </div>
+              <div v-else>
+                <v-subheader v-if="healths.length == 0" class="subheading">
+                  You have 0 Tasks, add some
+                </v-subheader>
               </div>
             </v-list>
           </v-card>
@@ -318,6 +322,7 @@ export default {
       currentTab: 0,
       tab: null,
       items: ['Dailie', 'Urgent', 'Ongoing', 'Health'],
+      selected: '',
       list: {
         0: false,
         1: false,
@@ -327,9 +332,9 @@ export default {
       ongoingtruth: false,
       urgenttruth: false,
       healthtruth: false,
-      selected: '',
       isDark: true,
       show: true,
+      newDailie: '',
       newHealth: '',
       newOngoing: '',
       newUrgent: '',
@@ -358,6 +363,8 @@ export default {
         done: false
       })
       this.newDailie = ''
+      console.log(this.dailies) // eslint-disable-line
+      console.log(this.selected) // eslint-disable-line
     },
     addUrgent() {
       const value = this.newUrgent && this.newUrgent.trim()
@@ -420,6 +427,22 @@ export default {
     },
     complete(index) {
       this.list[index] = !this.list[index]
+    },
+    selectTodo() {
+      if (this.selected === 'Dailie') {
+        this.dailietruth = true
+      } else if (this.selected === 'Urgent') {
+        this.urgenttruth = true
+      } else if (this.selected === 'Ongoing') {
+        this.ongoingtruth = true
+      } else if (this.selected === 'Health') {
+        this.healthtruth = true
+      } else {
+        this.dailietruth = false
+        this.urgenttruth = false
+        this.ongoingtruth = false
+        this.healthtruth = false
+      }
     }
   }
 }
