@@ -36,17 +36,12 @@
               <div v-if="currentTab === 0" v-show="currentTab === 0">
                 <v-card-text v-for="item in dailies" :key="item.title">
                   <b>{{ item.title }}</b>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
-                    <v-icon color="error">
-                      close
-                    </v-icon>
-                  </v-btn>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="removeDailie(index)">
                     <v-icon color="error">
                       done
                     </v-icon>
                   </v-btn>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="editDailie(index)">
                     <v-icon color="error">
                       edit
                     </v-icon>
@@ -56,17 +51,12 @@
               <div v-else-if="currentTab === 1" v-show="currentTab === 1">
                 <v-card-text v-for="item in urgents" :key="item.title">
                   <b>{{ item.title }}</b>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
-                    <v-icon color="error">
-                      close
-                    </v-icon>
-                  </v-btn>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
-                    <v-icon color="error">
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="removeUrgent(index)">
+                    <v- icon color="error">
                       done
-                    </v-icon>
+                    </v->
                   </v-btn>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="editUrgent(index)">
                     <v-icon color="error">
                       edit
                     </v-icon>
@@ -76,17 +66,12 @@
               <div v-else-if="currentTab === 2" v-show="currentTab === 2">
                 <v-card-text v-for="item in ongoings" :key="item.title">
                   <b>{{ item.title }}</b>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
-                    <v-icon color="error">
-                      close
-                    </v-icon>
-                  </v-btn>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="removeOngoing(index)">
                     <v-icon color="error">
                       done
                     </v-icon>
                   </v-btn>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="editOngoing(index)">
                     <v-icon color="error">
                       edit
                     </v-icon>
@@ -96,17 +81,12 @@
               <div v-else-if="currentTab === 3" v-show="currentTab === 3">
                 <v-card-text v-for="item in healths" :key="item.title">
                   <b>{{ item.title }}</b>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
-                    <v-icon color="error">
-                      close
-                    </v-icon>
-                  </v-btn>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="removeHealth(index)">
                     <v-icon color="error">
                       done
                     </v-icon>
                   </v-btn>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon>
+                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="editHealth(index)">
                     <v-icon color="error">
                       edit
                     </v-icon>
