@@ -32,6 +32,12 @@
               :rules="passwordRules"
               required
             />
+            <v-select
+              v-model="reason"
+              :items="items"
+              :menu-props="{ top: true, offsetY: true }"
+              label="Reason For Joining"
+            />
             <br>
             <v-btn class="rounded-corners success to-lower" @click="register">
               register
@@ -57,6 +63,7 @@ export default {
   },
   data() {
     return {
+      items: ['Get Healthy', 'Get Thick', 'Get Lean', 'Get Sleep', 'Get Smart'],
       valid: false,
       usernameRules: [
         v => !!v || 'Name is required',
@@ -74,7 +81,8 @@ export default {
       checkbox: true,
       username: '',
       email: '',
-      password: ''
+      password: '',
+      reason: ''
     }
   },
   methods: {
@@ -94,10 +102,12 @@ export default {
         const response = await this.$axios.post('/auth/register', {
           username: this.username,
           email: this.email,
-          password: this.password
+          password: this.password,
+          reason: this.reason
         })
         if (response) {
-          this.$store.state.email = this.email
+          this.$store.commit('setEmail', this.email)
+          this.$store.commit('setReason', this.reason)
           this.$store.state.username = response.data.username
         }
         this.$router.push('/login')

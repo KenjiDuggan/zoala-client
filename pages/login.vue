@@ -59,6 +59,7 @@ export default {
         v => !!v || 'Password is required'
       ],
       email: '',
+      username: '',
       password: '',
       error: null,
       response: '',
@@ -85,8 +86,10 @@ export default {
         })
         if (response.data.token) {
           this.$store.commit('setEmail', this.email)
-          this.$store.commit('setUsername', this.username)
-          this.$auth.setToken('local', response.data.token)
+          this.$store.commit('setUsername', response.data.username)
+          this.$store.commit('setToken', response.data.token)
+          this.$store.commit('setReason', response.data.reason)
+          // this.$auth.setToken('local', response.data.token)
           // Cookie.set('auth', response.data.token)
         }
         await this.$auth.loginWith('local', {
@@ -96,8 +99,7 @@ export default {
           }
         })
           .then((response) => {
-            this.$store.state.auth.loggedIn = true
-            this.$router.push('/')
+            this.$store.commit('setAuth', true)
           })
           .catch((e) => {
             throw e

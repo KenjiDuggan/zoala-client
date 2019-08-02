@@ -217,6 +217,9 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <v-btn @click="sendGoals">
+      Save your goals!
+    </v-btn>
   </div>
 </template>
 <script>
@@ -270,6 +273,19 @@ export default {
       ord: this.nth(new Date().getDate()),
       year: new Date().getFullYear()
     }
+  },
+  created() {
+    this.$axios.get('/api/goal', { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
+      .then((response) => {
+        this.dailies = response.data.dailies
+        this.ongoings = response.data.ongoings
+        this.urgents = response.data.urgents
+        this.healths = response.data.healths
+        console.log(response.data) // eslint-disable-line
+        throw response.data
+      }).catch((error) => {
+        throw error
+      })
   },
   methods: {
     addDailie() {
@@ -348,13 +364,11 @@ export default {
       this.dailiEdit = ''
     },
     editUrgent2(index) {
-      console.log(index) // eslint-disable-line
       this.urgents[index] = this.urgentEdit
       this.editUrgent = false
       this.urgentEdit = ''
     },
     editOngoing2(index) {
-      console.log(dailies) // eslint-disable-line
       this.ongoings[index] = this.ongoingEdit
       this.editOngoing = false
       this.ongoingEdit = ''
@@ -403,6 +417,19 @@ export default {
         this.ongoingtruth = false
         this.healthtruth = true
       }
+    },
+    sendGoals() {
+      this.$axios.post('/api/goal', {
+        dailie: this.dailies,
+        urgent: this.urgents,
+        ongoing: this.ongoings,
+        health: this.healths
+      }, { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
+        .then((response) => {
+          throw response
+        }).catch((error) => {
+          throw error
+        })
     }
   }
 }

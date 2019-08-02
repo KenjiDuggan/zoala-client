@@ -8,6 +8,9 @@ export const getters = {
   loggedInUser(state) {
     return state.auth.user
   },
+  token(state) {
+    return state.token
+  },
   muscle(state) {
     return state.muscle
   },
@@ -26,8 +29,8 @@ export const getters = {
   username(state) {
     return state.username
   },
-  auth(state) {
-    return state.auth
+  reason(state) {
+    return state.reason
   }
 }
 
@@ -42,7 +45,8 @@ export const state = () => ({
   sleep: null,
   food: null,
   token: null,
-  map: null
+  map: null,
+  reason: null
 })
 
 export const actions = {
@@ -62,6 +66,9 @@ export const actions = {
   },
   setEmail({ commit }, email) {
     commit('setEmail', email)
+  },
+  setToken({ commit }, token) {
+    commit('setToken', token)
   },
   setGoal({ commit }, goal) {
     commit('setGoal', goal)
@@ -85,13 +92,19 @@ export const actions = {
 
 export const mutations = {
   setAuth(state, auth) {
-    state.auth = auth
+    state.auth.loggedIn = auth
   },
   setUsername(state, username) {
     state.username = username
   },
   setEmail(state, email) {
     state.email = email
+  },
+  setToken(state, token) {
+    state.token = token
+  },
+  setReason(state, reason) {
+    state.reason = reason
   },
   setGoal(state, goal) {
     state.goal = goal
