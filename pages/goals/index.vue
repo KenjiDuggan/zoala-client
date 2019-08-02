@@ -34,63 +34,139 @@
           <v-tabs-items v-model="tab">
             <v-card flat>
               <div v-if="currentTab === 0" v-show="currentTab === 0">
-                <v-card-text v-for="item in dailies" :key="item.title">
+                <v-card-text v-for="item in dailies" :key="item.id">
                   <b>{{ item.title }}</b>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="removeDailie(index)">
+                  <v-btn
+                    slot="activator"
+                    left
+                    class="v-btn--simple txt-xs-right"
+                    color="danger"
+                    icon
+                    @click="removeDailie(index)"
+                  >
                     <v-icon color="error">
-                      done
+                      check
                     </v-icon>
                   </v-btn>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="editDailie(index)">
+                  <v-btn
+                    slot="activator"
+                    left
+                    class="v-btn--simple"
+                    color="danger"
+                    icon
+                    @click="editDailie1()"
+                  >
                     <v-icon color="error">
                       edit
                     </v-icon>
                   </v-btn>
+                  <div v-if="editDailie">
+                    <v-flex xs12>
+                      <v-text-field v-model="dailyEdit" label="Editing Now" @keyup.enter="editDailie2(item.id)" />
+                    </v-flex>
+                  </div>
                 </v-card-text>
               </div>
               <div v-else-if="currentTab === 1" v-show="currentTab === 1">
-                <v-card-text v-for="item in urgents" :key="item.title">
+                <v-card-text v-for="item in urgents" :key="item.id">
                   <b>{{ item.title }}</b>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="removeUrgent(index)">
+                  <v-btn
+                    slot="activator"
+                    left
+                    class="v-btn--simple"
+                    color="danger"
+                    icon
+                    @click="removeUrgent(index)"
+                  >
                     <v- icon color="error">
-                      done
+                      check
                     </v->
                   </v-btn>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="editUrgent(index)">
+                  <v-btn
+                    slot="activator"
+                    left
+                    class="v-btn--simple"
+                    color="danger"
+                    icon
+                    @click="editUrgent1()"
+                  >
                     <v-icon color="error">
                       edit
                     </v-icon>
                   </v-btn>
+                  <div v-if="editUrgent">
+                    <v-flex xs12>
+                      <v-text-field v-model="urgentEdit" label="Editing Now" @keyup.enter="editUrgent2(item.id)" />
+                    </v-flex>
+                  </div>
                 </v-card-text>
               </div>
               <div v-else-if="currentTab === 2" v-show="currentTab === 2">
-                <v-card-text v-for="item in ongoings" :key="item.title">
+                <v-card-text v-for="item in ongoings" :key="item.id">
                   <b>{{ item.title }}</b>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="removeOngoing(index)">
+                  <v-btn
+                    slot="activator"
+                    left
+                    class="v-btn--simple"
+                    color="danger"
+                    icon
+                    @click="removeOngoing(index)"
+                  >
                     <v-icon color="error">
-                      done
+                      check
                     </v-icon>
                   </v-btn>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="editOngoing(index)">
+                  <v-btn
+                    slot="activator"
+                    left
+                    class="v-btn--simple"
+                    color="danger"
+                    icon
+                    @click="editOngoing1()"
+                  >
                     <v-icon color="error">
                       edit
                     </v-icon>
                   </v-btn>
+                  <div v-if="editOngoing">
+                    <v-flex xs12>
+                      <v-text-field v-model="ongoingEdit" label="Editing Now" @keyup.enter="editOngoing2(item.id)" />
+                    </v-flex>
+                  </div>
                 </v-card-text>
               </div>
               <div v-else-if="currentTab === 3" v-show="currentTab === 3">
-                <v-card-text v-for="item in healths" :key="item.title">
+                <v-card-text v-for="item in healths" :key="item.id">
                   <b>{{ item.title }}</b>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="removeHealth(index)">
+                  <v-btn
+                    slot="activator"
+                    left
+                    class="v-btn--simple"
+                    color="danger"
+                    icon
+                    @click="removeHealth(index)"
+                  >
                     <v-icon color="error">
-                      done
+                      check
                     </v-icon>
                   </v-btn>
-                  <v-btn slot="activator" class="v-btn--simple" color="danger" icon @click="editHealth(index)">
+                  <v-btn
+                    slot="activator"
+                    left
+                    class="v-btn--simple"
+                    color="danger"
+                    icon
+                    @click="editHealth1(index)"
+                  >
                     <v-icon color="error">
                       edit
                     </v-icon>
                   </v-btn>
+                  <div v-if="editHealth">
+                    <v-flex xs12>
+                      <v-text-field v-model="healthEdit" label="Editing Now" @keyup.enter="editHealth2(item.id)" />
+                    </v-flex>
+                  </div>
                 </v-card-text>
               </div>
             </v-card>
@@ -136,38 +212,6 @@
                   </v-flex>
                 </div>
               </v-container>
-              <div v-if="dailietruth">
-                <v-subheader v-if="dailies.length == 0" class="subheading">
-                  You have 0 Tasks, add some
-                </v-subheader>
-                <v-subheader v-else class="subheading">
-                  Your Tasks
-                </v-subheader>
-              </div>
-              <div v-else-if="urgenttruth">
-                <v-subheader v-if="urgents.length == 0" class="subheading">
-                  You have 0 Tasks, add some
-                </v-subheader>
-                <v-subheader v-else class="subheading">
-                  Your Tasks
-                </v-subheader>
-              </div>
-              <div v-else-if="ongoingtruth">
-                <v-subheader v-if="ongoings.length == 0" class="subheading">
-                  You have 0 Tasks, add some
-                </v-subheader>
-                <v-subheader v-else class="subheading">
-                  Your Tasks
-                </v-subheader>
-              </div>
-              <div v-else>
-                <v-subheader v-if="healths.length == 0" class="subheading">
-                  You have 0 Tasks, add some
-                </v-subheader>
-                <v-subheader v-else class="subheading">
-                  Your Tasks
-                </v-subheader>
-              </div>
             </v-list>
           </v-card>
         </v-flex>
@@ -199,12 +243,20 @@ export default {
       ongoingtruth: false,
       urgenttruth: false,
       healthtruth: false,
+      editDailie: false,
+      editOngoing: false,
+      editUrgent: false,
+      editHealth: false,
       isDark: true,
       show: true,
       newDailie: '',
       newHealth: '',
       newOngoing: '',
       newUrgent: '',
+      dailieEdit: '',
+      healthEdit: '',
+      ongoingEdit: '',
+      urgentEdit: '',
       dailies: [],
       dailie: [],
       urgents: [],
@@ -275,6 +327,42 @@ export default {
     },
     removeHealth(index) {
       this.healths.splice(index, 1)
+    },
+    editDailie1(index) {
+      this.editDailie = true
+    },
+    editUrgent1(index) {
+      this.editUrgent = true
+    },
+    editOngoing1(index) {
+      this.editOngoing = true
+    },
+    editHealth1(index) {
+      this.editHealth = true
+    },
+    editDailie2(index) {
+      console.log(this.dailies) // eslint-disable-line
+      console.log(index); // eslint-disable-line
+      this.dailies[index] = this.dailieEdit
+      this.editDailie = false
+      this.dailiEdit = ''
+    },
+    editUrgent2(index) {
+      console.log(index) // eslint-disable-line
+      this.urgents[index] = this.urgentEdit
+      this.editUrgent = false
+      this.urgentEdit = ''
+    },
+    editOngoing2(index) {
+      console.log(dailies) // eslint-disable-line
+      this.ongoings[index] = this.ongoingEdit
+      this.editOngoing = false
+      this.ongoingEdit = ''
+    },
+    editHealth2(index) {
+      this.healths[index] = this.healthEdit
+      this.editHealth = false
+      this.healthEdit = ''
     },
     todoDay() {
       const d = new Date()
