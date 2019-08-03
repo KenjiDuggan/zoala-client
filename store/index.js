@@ -11,6 +11,18 @@ export const getters = {
   token(state) {
     return state.token
   },
+  dailies(state) {
+    return state.dailies
+  },
+  ongoings(state) {
+    return state.ongoings
+  },
+  urgents(state) {
+    return state.urgents
+  },
+  healths(state) {
+    return state.healths
+  },
   muscle(state) {
     return state.muscle
   },
@@ -46,7 +58,11 @@ export const state = () => ({
   food: null,
   token: null,
   map: null,
-  reason: null
+  reason: null,
+  dailies: null,
+  ongoings: null,
+  urgents: null,
+  healths: null
 })
 
 export const actions = {
@@ -102,6 +118,18 @@ export const mutations = {
   },
   setToken(state, token) {
     state.token = token
+  },
+  setDailies(state, dailies) {
+    state.dailies = dailies
+  },
+  setOngoings(state, ongoings) {
+    state.ongoings = ongoings
+  },
+  setUrgents(state, urgents) {
+    state.urgents = urgents
+  },
+  setHealths(state, healths) {
+    state.healths = healths
   },
   setReason(state, reason) {
     state.reason = reason

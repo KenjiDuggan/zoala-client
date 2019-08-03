@@ -78,9 +78,9 @@
                     icon
                     @click="removeUrgent(index)"
                   >
-                    <v- icon color="error">
+                    <v-icon color="error">
                       check
-                    </v->
+                    </v-icon>
                   </v-btn>
                   <v-btn
                     slot="activator"
@@ -193,22 +193,22 @@
                 />
                 <div v-if="dailietruth">
                   <v-flex xs12>
-                    <v-text-field v-model="newDailie" clearable name="newDailie" label="Task description" @keyup.enter="addDailie" />
+                    <v-text-field v-model="newDailie" clearable name="newDailie" label="Task description" @keyup.enter="addDailie()" />
                   </v-flex>
                 </div>
                 <div v-else-if="urgenttruth">
                   <v-flex xs12>
-                    <v-text-field v-model="newUrgent" clearable name="newUrgent" label="Task description" @keyup.enter="addUrgent" />
+                    <v-text-field v-model="newUrgent" clearable name="newUrgent" label="Task description" @keyup.enter="addUrgent()" />
                   </v-flex>
                 </div>
                 <div v-else-if="ongoingtruth">
                   <v-flex xs12>
-                    <v-text-field v-model="newOngoing" clearable name="newOngoing" label="Task description" @keyup.enter="addOngoing" />
+                    <v-text-field v-model="newOngoing" clearable name="newOngoing" label="Task description" @keyup.enter="addOngoing()" />
                   </v-flex>
                 </div>
                 <div v-else>
                   <v-flex xs12>
-                    <v-text-field v-model="newHealth" clearable name="newHealth" label="Task description" @keyup.enter="addHealth" />
+                    <v-text-field v-model="newHealth" clearable name="newHealth" label="Task description" @keyup.enter="addHealth()" />
                   </v-flex>
                 </div>
               </v-container>
@@ -277,11 +277,18 @@ export default {
   created() {
     this.$axios.get('/api/goal', { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
       .then((response) => {
-        this.dailies = response.data.dailies
-        this.ongoings = response.data.ongoings
-        this.urgents = response.data.urgents
-        this.healths = response.data.healths
-        console.log(response.data) // eslint-disable-line
+        console.log(response.data.dailies) // eslint-disable-line
+        if (response.data.length() === 0) {
+          this.dailies = []
+          this.ongoings = []
+          this.urgents = []
+          this.healths = []
+        } else {
+          this.dailies = response.data.dailies
+          this.ongoings = response.data.ongoings
+          this.urgents = response.data.urgents
+          this.healths = response.data.healths
+        }
         throw response.data
       }).catch((error) => {
         throw error
@@ -291,7 +298,7 @@ export default {
     addDailie() {
       const value = this.newDailie && this.newDailie.trim()
       if (!value) {
-        return
+        return this.newDailie
       }
       this.dailies.push({
         title: this.newDailie,
@@ -302,7 +309,7 @@ export default {
     addUrgent() {
       const value = this.newUrgent && this.newUrgent.trim()
       if (!value) {
-        return
+        return this.newUrgent
       }
       this.urgents.push({
         title: this.newUrgent,
@@ -313,7 +320,7 @@ export default {
     addOngoing() {
       const value = this.newOngoing && this.newOngoing.trim()
       if (!value) {
-        return
+        return this.newOngoing
       }
       this.ongoings.push({
         title: this.newOngoing,
@@ -324,7 +331,7 @@ export default {
     addHealth() {
       const value = this.newHealth && this.newHealth.trim()
       if (!value) {
-        return
+        return this.newHealth
       }
       this.healths.push({
         title: this.newHealth,
@@ -426,6 +433,10 @@ export default {
         health: this.healths
       }, { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
         .then((response) => {
+          this.$store.commit('setDailies', this.dailies)
+          this.$store.commit('setUrgents', this.urgents)
+          this.$store.commit('setOngoings', this.ongoings)
+          this.$store.commit('setHealths', this.healths)
           throw response
         }).catch((error) => {
           throw error
