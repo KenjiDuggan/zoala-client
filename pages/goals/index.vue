@@ -277,11 +277,11 @@ export default {
   created() {
     this.$axios.get('/api/goal', { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
       .then((response) => {
-        console.log(response.data[0].dailie) // eslint-disable-line
-        this.dailies = response.data[0].dailie
-        this.ongoings = response.data[0].ongoing
-        this.urgents = response.data[0].urgent
-        this.healths = response.data[0].health
+        console.log(response.data[response.data.length - 1].dailie) // eslint-disable-line
+        this.dailies = response.data[response.data.length - 1].dailie
+        this.ongoings = response.data[response.data.length - 1].ongoing
+        this.urgents = response.data[response.data.length - 1].urgent
+        this.healths = response.data[response.data.length - 1].health
           console.log(this.dailies) // eslint-disable-line
           console.log(this.ongoings) // eslint-disable-line
         throw response.data

@@ -1,5 +1,12 @@
 <template>
   <div>
+    <nuxt-link to="/muscles">
+      <v-btn left class="ma-2" color="orange darken-2" dark>
+        <v-icon dark left>
+          arrow_back
+        </v-icon>Back
+      </v-btn>
+    </nuxt-link>
     <v-container fill-height>
       <v-layout align-center>
         <v-flex>
@@ -64,10 +71,10 @@ export default {
     }
   },
   created() {
-    // const username = this.$store.state.username
     this.$axios.get('/api/muscle', { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
       .then((response) => {
-        this.muscle = response.data
+        this.muscle = response.data.muscles
+        console.log(response.data.muscles) // eslint-disable-line
         this.$store.commit('setMuscle', response.data)
         throw response.data
       }).catch((error) => {

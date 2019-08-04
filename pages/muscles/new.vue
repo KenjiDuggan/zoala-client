@@ -1,5 +1,12 @@
 <template>
   <div>
+    <nuxt-link to="/muscles">
+      <v-btn left class="ma-2 secondary" dark>
+        <v-icon dark left>
+          arrow_back
+        </v-icon>Back
+      </v-btn>
+    </nuxt-link>
     <v-container class="my-5">
       <h1 class="secondary--text text-xs-center text-uppercase">
         Weekly Workout Info

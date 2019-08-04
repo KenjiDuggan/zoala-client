@@ -108,9 +108,10 @@ export default {
         if (response) {
           this.$store.commit('setEmail', this.email)
           this.$store.commit('setReason', this.reason)
+          this.$store.commit('setAuth', true)
           this.$store.state.username = response.data.username
         }
-        this.$router.push('/login')
+        this.$router.push('/goals')
         throw response.data
       } catch (e) {
         this.error = e.response
