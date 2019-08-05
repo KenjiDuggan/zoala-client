@@ -41,6 +41,7 @@
 
 <script>
 import Notification from '../components/Notification'
+
 // const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
@@ -100,6 +101,13 @@ export default {
         })
           .then((response) => {
             this.$store.commit('setAuth', true)
+            this.$swal({
+              title: 'You are looged in!',
+              text: 'You clicked the button!',
+              icon: 'success',
+              button: 'Aww yiss!'
+            })
+            this.$router.push('/goals')
           })
           .catch((e) => {
             throw e

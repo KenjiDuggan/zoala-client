@@ -47,6 +47,16 @@
           </v-card>
         </v-expansion-panel-content>
       </v-expansion-panel>
+      <br>
+      <div class="d-flex justify-between align-center mb-3">
+        <v-btn class="info--text accent rounded-corners" @click="editmuscle1(k)">
+          Edit this workout
+        </v-btn>
+        <v-btn class="info--text accent rounded-corners" @click="deletemuscle1(k)">
+          Delete this workout
+        </v-btn>
+      </div>
+      <br>
     </div>
   </div>
 </template>
@@ -76,10 +86,43 @@ export default {
   },
   methods: {
     all() {
-      this.panel = [...Array(this.items).keys()].map((k, i) => true)
+      this.panel = [...Array(this.items).keys()].map(k => true)
     },
     none() {
       this.panel = []
+    },
+    editmuscle1(k) {
+      console.log(this.muscle) // eslint-disable-line
+      console.log(this.muscle[k]._id) // eslint-disable-line
+      console.log(k) // eslint-disable-line
+
+      const id = this.muscle[k]._id
+      const username = this.$store.state.username
+      this.$swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        buttons: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        buttonsStyling: true
+      }).then(function (isConfirm) {
+        if (isConfirm.value === true) {
+          this.$axios.delete('muscle/' + id, {
+            data: {
+              id: id,
+              username: username
+            }
+          }).then(function (response) {
+            console.log('success') // eslint-disable-line
+          })
+        }
+      })
+    },
+    deletemuscle1(k) {
+
     }
   },
   middleware: 'auth'

@@ -50,7 +50,8 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    'vue-sweetalert2/nuxt'
   ],
   /*
    ** Axios module configuration
