@@ -1,12 +1,5 @@
 <template>
   <div>
-    <nuxt-link to="/muscles">
-      <v-btn left class="ma-2" color="orange darken-2" dark>
-        <v-icon dark left>
-          arrow_back
-        </v-icon>Back
-      </v-btn>
-    </nuxt-link>
     <v-container fill-height>
       <v-layout align-center>
         <v-flex>
