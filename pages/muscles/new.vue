@@ -150,7 +150,9 @@ export default {
         description: this.description,
         days: this.days,
         username: username
-      }, { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
+      },
+      { headers: { Authorization: 'Bearer ' + this.$store.state.token } },
+      { withCredentials: true })
         .then((response) => {
           this.$router.push('/muscles')
           throw response

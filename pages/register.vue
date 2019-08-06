@@ -9,7 +9,7 @@
         register
       </h1>
       <br>
-      <divider />
+      <v-divider />
       <v-layout align-center>
         <v-flex class="text-sm-center">
           <v-form ref="form" v-model="valid" class="info--text">
@@ -104,7 +104,8 @@ export default {
           email: this.email,
           password: this.password,
           reason: this.reason
-        })
+        },
+        { setCredentials: true })
         if (response) {
           this.$store.commit('setEmail', this.email)
           this.$store.commit('setReason', this.reason)

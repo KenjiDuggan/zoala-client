@@ -74,7 +74,8 @@ export default {
     }
   },
   created() {
-    this.$axios.get('/api/muscle', { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
+    this.$axios.get('/api/muscle',
+      { setCredentials: true })
       .then((response) => {
         this.muscle = response.data.muscles
         console.log(response.data.muscles) // eslint-disable-line
@@ -103,10 +104,7 @@ export default {
         buttons: 'Delete'
       }).then(() => {
         this.$axios.delete('/api/muscle/' + id,
-          { headers: { Authorization: 'Bearer ' + this.$store.state.token },
-            data: { title: this.muscle[k].name }
-          })
-        window.location.reload()
+          { setCredentials: true })
           console.log(this.muscle[k].name) // eslint-disable-line
       }).catch((e) => {
         console.log(e) // eslint-disable-line

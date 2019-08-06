@@ -1,5 +1,5 @@
 module.exports = {
-  mode: 'spa',
+  mode: 'SPA',
   /*
    ** Headers of the page
    */
@@ -62,11 +62,15 @@ module.exports = {
   },
 
   auth: {
+    redirect: {
+      login: '/goals',
+      logout: '/login'
+    },
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'auth/login', method: 'post', propertyName: 'data' },
-          user: { url: 'auth/me', method: 'get', propertyName: 'data' },
+          login: { url: 'auth/login', method: 'post', propertyName: 'data', setCredentials: true },
+          user: { url: 'auth/me', method: 'get', propertyName: false },
           logout: false
         }
       }

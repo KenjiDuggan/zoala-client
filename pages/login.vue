@@ -10,7 +10,7 @@
         login
       </h1>
       <br>
-      <divider />
+      <v-divider />
       <v-layout align-center>
         <v-flex class="text-sm-center">
           <v-form ref="form" v-model="valid" class="info--text">
@@ -84,14 +84,16 @@ export default {
         const response = await this.$axios.post('/auth/login', {
           email: this.email,
           password: this.password
-        })
+        },
+        { setCredentials: true }
+        )
         if (response.data.token) {
           this.$store.commit('setEmail', this.email)
           this.$store.commit('setUsername', response.data.username)
           this.$store.commit('setToken', response.data.token)
           this.$store.commit('setReason', response.data.reason)
-          // this.$auth.setToken('local', response.data.token)
-          // Cookie.set('auth', response.data.token)
+          this.$auth.setToken('local', 'Bearer ' + response.data.token)
+          Cookie.set('auth', 'Bearer ' + response.data.token)
         }
         await this.$auth.loginWith('local', {
           data: {
@@ -101,7 +103,7 @@ export default {
         })
           .then((response) => {
             this.$store.commit('setAuth', true)
-            Cookie.set('auth', response.data.token)
+
             this.$swal({
               title: 'You are logged in!',
               text: 'You clicked the button!',
