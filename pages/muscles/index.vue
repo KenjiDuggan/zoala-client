@@ -106,6 +106,7 @@ export default {
           { headers: { Authorization: 'Bearer ' + this.$store.state.token },
             data: { title: this.muscle[k].name }
           })
+        window.location.reload()
           console.log(this.muscle[k].name) // eslint-disable-line
       }).catch((e) => {
         console.log(e) // eslint-disable-line

@@ -81,9 +81,9 @@
 </template>
 
 <script>
-// const Cookie = process.client ? require('js-cookie') : undefined;
-
 import { mapGetters } from 'vuex'
+
+const Cookie = process.client ? require('js-cookie') : undefined
 export default {
   data() {
     return {
@@ -155,7 +155,7 @@ export default {
   },
   methods: {
     logout() {
-      // Cookie.remove('auth')
+      Cookie.remove('auth')
       this.$store.commit('setAuth', null)
       this.$router.redirect('/login')
     }

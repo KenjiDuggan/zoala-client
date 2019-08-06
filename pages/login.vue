@@ -42,7 +42,7 @@
 <script>
 import Notification from '../components/Notification'
 
-// const Cookie = process.client ? require('js-cookie') : undefined
+const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
   middleware: 'guest',
@@ -101,11 +101,12 @@ export default {
         })
           .then((response) => {
             this.$store.commit('setAuth', true)
+            Cookie.set('auth', response.data.token)
             this.$swal({
-              title: 'You are looged in!',
+              title: 'You are logged in!',
               text: 'You clicked the button!',
               icon: 'success',
-              button: 'Aww yiss!'
+              button: 'Aww yeeee!'
             })
             this.$router.push('/goals')
           })
