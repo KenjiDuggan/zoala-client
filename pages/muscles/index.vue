@@ -94,35 +94,19 @@ export default {
     editmuscle1(k) {
       console.log(this.muscle) // eslint-disable-line
       console.log(this.muscle[k]._id) // eslint-disable-line
-      console.log(k) // eslint-disable-line
-
+    },
+    deletemuscle1(k) {
       const id = this.muscle[k]._id
-      const username = this.$store.state.username
       this.$swal({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
-        type: 'warning',
-        buttons: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        buttonsStyling: true
-      }).then(function (isConfirm) {
-        if (isConfirm.value === true) {
-          this.$axios.delete('muscle/' + id, {
-            data: {
-              id: id,
-              username: username
-            }
-          }).then(function (response) {
-            console.log('success') // eslint-disable-line
-          })
-        }
+        buttons: 'Delete'
+      }).then(() => {
+        this.$axios.delete('/api/muscle/' + id,
+          { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
+      }).catch((e) => {
+        console.log(e) // eslint-disable-line
       })
-    },
-    deletemuscle1(k) {
-
     }
   },
   middleware: 'auth'
