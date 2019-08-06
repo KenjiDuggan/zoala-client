@@ -103,7 +103,10 @@ export default {
         buttons: 'Delete'
       }).then(() => {
         this.$axios.delete('/api/muscle/' + id,
-          { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
+          { headers: { Authorization: 'Bearer ' + this.$store.state.token },
+            data: { title: this.muscle[k].name }
+          })
+          console.log(this.muscle[k].name) // eslint-disable-line
       }).catch((e) => {
         console.log(e) // eslint-disable-line
       })
