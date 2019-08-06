@@ -23,11 +23,11 @@
       <h1>{{ muscle[k].name }}</h1><v-divider />
       <h3>{{ muscle[k].description }}</h3><br>
       <div class="d-flex justify-between align-center mb-3">
-        <v-btn class="info--text accent rounded-corners" @click="all">
-          Check all week!
+        <v-btn class="info--text accent rounded-corners" @click="editmuscle1(k)">
+          Edit this workout
         </v-btn>
-        <v-btn class="info--text accent rounded-corners" @click="none">
-          Close Em'
+        <v-btn class="info--text accent rounded-corners" @click="deletemuscle1(k)">
+          Delete this workout
         </v-btn>
       </div>
       <v-expansion-panel v-model="panel">
@@ -48,15 +48,6 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
       <br>
-      <div class="d-flex justify-between align-center mb-3">
-        <v-btn class="info--text accent rounded-corners" @click="editmuscle1(k)">
-          Edit this workout
-        </v-btn>
-        <v-btn class="info--text accent rounded-corners" @click="deletemuscle1(k)">
-          Delete this workout
-        </v-btn>
-      </div>
-      <br>
     </div>
   </div>
 </template>
@@ -69,7 +60,6 @@ export default {
       items: 12,
       jtems: 24,
       ktems: 4,
-      panel: [],
       length: 3
     }
   },
@@ -86,12 +76,6 @@ export default {
       })
   },
   methods: {
-    all() {
-      this.panel = [...Array(this.items).keys()].map(k => true)
-    },
-    none() {
-      this.panel = []
-    },
     editmuscle1(k) {
       console.log(this.muscle) // eslint-disable-line
       console.log(this.muscle[k]._id) // eslint-disable-line
@@ -105,6 +89,18 @@ export default {
       }).then(() => {
         this.$axios.delete('/api/muscle/' + id,
           { setCredentials: true })
+          .then(() => {
+            this.$axios.get('/api/muscle',
+              { setCredentials: true })
+              .then((response) => {
+                this.muscle = response.data.muscles
+                this.$store.commit('setMuscle', response.data)
+                throw response.data
+              }).catch((error) => {
+                throw error
+              })
+          })
+
           console.log(this.muscle[k].name) // eslint-disable-line
       }).catch((e) => {
         console.log(e) // eslint-disable-line
