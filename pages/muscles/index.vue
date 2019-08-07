@@ -94,7 +94,7 @@ export default {
               { setCredentials: true })
               .then((response) => {
                 this.muscle = response.data.muscles
-                this.$store.commit('setMuscle', response.data)
+                this.$store.commit('setMuscle', response.data.muscles)
                 throw response.data
               }).catch((error) => {
                 throw error

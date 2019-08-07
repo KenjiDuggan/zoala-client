@@ -165,9 +165,11 @@ export default {
         name: this.name,
         description: this.description,
         days: this.days,
-        username: username
-      }, { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
+        username: username },
+      { headers: { Authorization: 'Bearer ' + this.$store.state.token } },
+      { setCredentials: true })
         .then((response) => {
+          console.log(this.days) // eslint-disable-line
           this.$router.push('/cardios')
         }).catch((error) => {
           throw error
