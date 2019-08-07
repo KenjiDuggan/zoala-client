@@ -100,7 +100,6 @@ export default {
                 throw error
               })
           })
-
           console.log(this.muscle[k].name) // eslint-disable-line
       }).catch((e) => {
         console.log(e) // eslint-disable-line
