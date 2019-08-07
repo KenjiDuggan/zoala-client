@@ -37,9 +37,8 @@
             </template>
             <v-card>
               <v-card-text>
-                <h4>{{ food[k].schedule[i].speed }}</h4>
+                <h4>Pre-Workout: {{ food[k].schedule[i].mealname1 }}</h4>
                 <h4>{{ food[k].schedule[i].distance }}</h4>
-                <h4></h4>
               </v-card-text>
             </v-card>
           </v-expansion-panel-content>
@@ -91,7 +90,7 @@ export default {
               { setCredentials: true })
               .then((response) => {
                 this.food = response.data.foods
-                this.$store.commit('setfood', response.data.foods)
+                this.$store.commit('setFood', response.data.foods)
                 throw response.data
               }).catch((error) => {
                 throw error

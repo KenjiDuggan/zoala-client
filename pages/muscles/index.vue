@@ -69,7 +69,7 @@ export default {
       .then((response) => {
         this.muscle = response.data.muscles
         console.log(response.data.muscles) // eslint-disable-line
-        this.$store.commit('setMuscle', response.data)
+        this.$store.commit('setMuscle', response.data.muscles)
         throw response.data
       }).catch((error) => {
         throw error

@@ -1,5 +1,12 @@
 <template>
   <div>
+    <nuxt-link to="/cardios">
+      <v-btn left class="ma-2 warning" dark>
+        <v-icon dark left>
+          arrow_back
+        </v-icon>Back
+      </v-btn>
+    </nuxt-link>
     <v-container class="my-5">
       <h1 class="warning--text text-xs-center text-uppercase">
         Weekly Food Schedule
@@ -24,7 +31,6 @@
           />
         </v-form>
       </v-card>
-
       <v-card class="background pa-4 text-xs-center rounded-corners" flat>
         <h1 class="warning--text text-uppercase">
           Schedule
@@ -41,22 +47,22 @@
           >
             <v-card class="warning text-xs-center ma-3 pa-3 rounded-corners" flat>
               <v-card-title class="info--text text-xs-left font-weight-medium text-uppercase">
-                {{ meals[i].day }}
+                {{ meal[i].day }}
               </v-card-title>
               <div>
-                {{ meals[i].mealname1 }}
+                {{ meal[i].mealname1 }}
               </div>
               <v-text-field
                 v-model="foodPlaceholders1[i]"
                 hint="Press enter to continue"
                 color="background"
                 label="Food Items"
-                @keyup.enter="addFood1(meal[i].meal1, foodPlaceholders1[i])"
+                @keyup.enter="addFood1(meal.meal1, foodPlaceholders1[i])"
               />
               <v-card-text class="px-4 text-xs-left">
                 <ul :style="{listStyle: 'none'}">
                   <li
-                    v-for="(meal1, j) in meals[i].meal1[j]"
+                    v-for="(meal1, j) in meals.meal1s"
                     :key="j"
                     class="text-xs-left background--text text-uppercase"
                   >
@@ -64,7 +70,7 @@
                   </li>
                 </ul>
               </v-card-text>
-              <div>
+              <!-- <div>
                 {{ meals[i].mealname2 }}
               </div>
               <v-text-field
@@ -168,7 +174,7 @@
                     {{ meal6 }}
                   </li>
                 </ul>
-              </v-card-text>
+              </v-card-text> -->
             </v-card>
           </v-flex>
         </v-layout>
@@ -198,111 +204,113 @@ export default {
       foodPlaceholders4: ['', '', '', '', '', '', ''],
       foodPlaceholders5: ['', '', '', '', '', '', ''],
       foodPlaceholders6: ['', '', '', '', '', '', ''],
+      name: '',
+      description: '',
       meals: [
         {
           day: 'monday',
           mealname1: 'pre-workout',
-          meal1: [],
+          meal1s: [],
           mealname2: 'breakfast',
-          meal2: [],
+          meal2s: [],
           mealname3: 'snack',
-          meal3: [],
+          meal3s: [],
           mealname4: 'lunch',
-          meal4: [],
+          meal4s: [],
           mealname5: 'snack',
-          meal5: [],
+          meal5s: [],
           mealname6: 'dinner',
-          meal6: []
+          meal6s: []
         },
         {
           day: 'tuesday',
           mealname1: 'pre-workout',
-          meal1: [],
+          meal1s: [],
           mealname2: 'breakfast',
-          meal2: [],
+          meal2s: [],
           mealname3: 'snack',
-          meal3: [],
+          meal3s: [],
           mealname4: 'lunch',
-          meal4: [],
+          meal4s: [],
           mealname5: 'snack',
-          meal5: [],
+          meal5s: [],
           mealname6: 'dinner',
-          meal6: []
+          meal6s: []
         },
         {
           day: 'wednesday',
           mealname1: 'pre-workout',
-          meal1: [],
+          meal1s: [],
           mealname2: 'breakfast',
-          meal2: [],
+          meal2s: [],
           mealname3: 'snack',
-          meal3: [],
+          meal3s: [],
           mealname4: 'lunch',
-          meal4: [],
+          meal4s: [],
           mealname5: 'snack',
-          meal5: [],
+          meal5s: [],
           mealname6: 'dinner',
-          meal6: []
+          meal6s: []
         },
         {
           day: 'thursday',
           mealname1: 'pre-workout',
-          meal1: [],
+          meal1s: [],
           mealname2: 'breakfast',
-          meal2: [],
+          meal2s: [],
           mealname3: 'snack',
-          meal3: [],
+          meal3s: [],
           mealname4: 'lunch',
-          meal4: [],
+          meal4s: [],
           mealname5: 'snack',
-          meal5: [],
+          meal5s: [],
           mealname6: 'dinner',
-          meal6: []
+          meal6s: []
         },
         {
           day: 'friday',
           mealname1: 'pre-workout',
-          meal1: [],
+          meal1s: [],
           mealname2: 'breakfast',
-          meal2: [],
+          meal2s: [],
           mealname3: 'snack',
-          meal3: [],
+          meal3s: [],
           mealname4: 'lunch',
-          meal4: [],
+          meal4s: [],
           mealname5: 'snack',
-          meal5: [],
+          meal5s: [],
           mealname6: 'dinner',
-          meal6: []
+          meal6s: []
         },
         {
           day: 'saturday',
           mealname1: 'pre-workout',
-          meal1: [],
+          meal1s: [],
           mealname2: 'breakfast',
-          meal2: [],
+          meal2s: [],
           mealname3: 'snack',
-          meal3: [],
+          meal3s: [],
           mealname4: 'lunch',
-          meal4: [],
+          meal4s: [],
           mealname5: 'snack',
-          meal5: [],
+          meal5s: [],
           mealname6: 'dinner',
-          meal6: []
+          meal6s: []
         },
         {
           day: 'sunday',
           mealname1: 'pre-workout',
-          meal1: [],
+          meal1s: [],
           mealname2: 'breakfast',
-          meal2: [],
+          meal2s: [],
           mealname3: 'snack',
-          meal3: [],
+          meal3s: [],
           mealname4: 'lunch',
-          meal4: [],
+          meal4s: [],
           mealname5: 'snack',
-          meal5: [],
+          meal5s: [],
           mealname6: 'dinner',
-          meal6: []
+          meal6s: []
         }
       ]
     }
@@ -339,10 +347,11 @@ export default {
         description: this.description,
         meals: this.meals,
         username: username
-      }, { headers: { Authorization: 'Bearer ' + this.$store.state.token } })
+      }, { headers: { Authorization: 'Bearer ' + this.$store.state.token } },
+      { withCredentials: true })
         .then((response) => {
-          throw response.data
-        //   this.$router.push('/foods')
+          this.$router.push('/foods')
+          throw response
         }).catch((error) => {
           throw error
         })
