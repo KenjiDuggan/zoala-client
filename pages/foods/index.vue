@@ -38,7 +38,8 @@
             <v-card>
               <v-card-text>
                 <h4>{{ food[k].schedule[i].speed }}</h4>
-                <h4>{{ food[k].schedule[i].distance }} miles -- {{ food[k].schedule[i].time }} minutes</h4>
+                <h4>{{ food[k].schedule[i].distance }}</h4>
+                <h4></h4>
               </v-card-text>
             </v-card>
           </v-expansion-panel-content>

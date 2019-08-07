@@ -61,8 +61,8 @@
             </template>
             <v-card>
               <v-card-text>
-                <h4>{{ cardio[k].schedule[i].speed }}</h4>
-                <h4>{{ cardio[k].schedule[i].distance }} miles -- {{ cardio[k].schedule[i].time }} minutes</h4>
+                <h4>{{ cardio[k].schedule[i].speed }} Intensity</h4>
+                <h4>Distance: {{ cardio[k].schedule[i].distance }} miles -- Time: {{ cardio[k].schedule[i].time }} minutes</h4>
               </v-card-text>
             </v-card>
           </v-expansion-panel-content>
