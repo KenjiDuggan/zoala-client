@@ -44,24 +44,42 @@
               >
                 {{ day.day }}
               </v-card-title>
-              <v-select
-                v-model="day.speed"
-                :items="items"
-                color="background"
-                label="Relative Effort"
-              />
-              <v-select
-                v-model="day.time"
-                :jtems="jtems"
-                color="background"
-                label="Time (minutes)"
-              />
-              <v-select
-                v-model="day.distance"
-                :ktems="ktems"
-                color="background"
-                label="~Distance (miles)"
-              />
+              <div>
+                <label class="info--text text-xs-left typo__label">Speed</label>
+                <multiselect
+                  v-model="day.speed"
+                  :options="options1"
+                  :searchable="false"
+                  :close-on-select="false"
+                  :show-labels="false"
+                  placeholder="Pick a value"
+                />
+                <pre class="success--text"><code>{{ value1 }}</code></pre>
+              </div>
+              <div>
+                <label class="info--text text-xs-left typo__label">Time</label>
+                <multiselect
+                  v-model="day.time"
+                  :options="options2"
+                  :searchable="false"
+                  :close-on-select="false"
+                  :show-labels="false"
+                  placeholder="Pick a value"
+                />
+                <pre class="success--text"><code>{{ value2 }}</code></pre>
+              </div>
+              <div>
+                <label class="info--text text-xs-left typo__label">Distance</label>
+                <multiselect
+                  v-model="day.distance"
+                  :options="options3"
+                  :searchable="false"
+                  :close-on-select="false"
+                  :show-labels="false"
+                  placeholder="Pick a value"
+                />
+                <pre class="success--text"><code>{{ value3 }}</code></pre>
+              </div>
             </v-card>
           </v-flex>
         </v-layout>
@@ -84,9 +102,12 @@
 export default {
   data() {
     return {
-      items: ['Low', 'Moderate', 'High'],
-      jtems: ['5', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
-      ktems: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
+      value1: 'Speed Estimate',
+      value2: 'minutes',
+      value3: '~Miles',
+      options1: ['Low', 'Moderate', 'High'],
+      options2: [5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+      options3: ['1', '2', '3', '4', '5', '6', '7'],
       token: null,
       name: '',
       description: '',

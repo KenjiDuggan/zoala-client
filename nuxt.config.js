@@ -51,7 +51,8 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     '@nuxtjs/eslint-module',
-    'vue-sweetalert2/nuxt'
+    'vue-sweetalert2/nuxt',
+    'nuxt-vue-multiselect'
   ],
   /*
    ** Axios module configuration

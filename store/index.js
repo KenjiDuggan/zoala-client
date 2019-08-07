@@ -1,4 +1,6 @@
 
+import Cookie from 'cookie'
+import Cookies from 'js-cookie'
 const cookieparser = process.server ? require('cookieparser') : undefined
 
 export const getters = {
@@ -70,7 +72,25 @@ export const actions = {
     let auth = null
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie)
+      console.log(req.headers.cookie) // eslint-disable-line
       try {
+        const token = this.$store.state.token
+        if (process.browser) {
+          if (token) {
+            Cookie.set('ccmsToken', token, { expires: 3 })
+          } else {
+            Cookies.remove('ccmsToken')
+          }
+        } else {
+          const params = {
+            domain: '/'
+          }
+          if (!token) {
+            const date = new Date()
+            const expires = date.setDate(date.getDate() + 1)
+            params.expires = new Date(expires)
+          }
+        }
         auth = JSON.parse(parsed.auth)
       } catch (err) {
       }

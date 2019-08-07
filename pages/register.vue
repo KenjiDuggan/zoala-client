@@ -110,12 +110,12 @@ export default {
           this.$store.commit('setEmail', this.email)
           this.$store.commit('setReason', this.reason)
           this.$store.commit('setAuth', true)
-          this.$store.state.username = response.data.username
+          this.$store.commit('setUsername', response.data.username)
         }
         this.$router.push('/goals')
         throw response.data
       } catch (e) {
-        this.error = e.response
+        console.log(e) // eslint-disable-line
         throw e
       }
     }
