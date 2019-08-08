@@ -1,19 +1,15 @@
-FROM node:latest
+FROM node:latest as builder
 
-ENV APP_ROOT /src
+WORKDIR /app
 
-RUN mkdir -p /usr/src/zoala
-WORKDIR /usr/src/zoala
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-ADD . /usr/src/zoala
 
-RUN npm ci
-RUN npm run dev
+FROM nginx:1.17-alpine
 
-EXPOSE 5000
-
-ENV NUXT_HOST 0.0.0.0
-
-ENV NUXT_PORT=5000
-
-CMD [ "npm", "run", "start" ]
+COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

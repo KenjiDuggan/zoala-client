@@ -1,0 +1,33 @@
+# version: "3"
+# services:
+#   front:
+#     image: node:latest
+#     working_dir: "/usr/src/zoala-client"
+#     environment:
+#       - HOST=0.0.0.0
+#     ports:
+#       - "80:3000"
+#     volumes:
+#       - ./app:/usr/src/zoala-client
+#     command: bash -c "npm install && npm run dev"
+
+version: "3"
+
+# This file is for spinning up the development server
+services:
+  api:
+    image: node:latest
+    container_name: api
+    volumes:
+      - ./app:/usr/src/zoala-client
+    working_dir: "/usr/src/zoala-client"
+    command: npm run dev
+    ports:
+      - 3000:3000
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - 27017:27017
