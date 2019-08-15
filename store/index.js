@@ -28,6 +28,9 @@ export const getters = {
   muscle(state) {
     return state.muscle
   },
+  muscleid(state) {
+    return state.muscleid
+  },
   cardio(state) {
     return state.cardio
   },
@@ -55,6 +58,7 @@ export const state = () => ({
   password: null,
   goal: null,
   muscle: null,
+  muscleid: null,
   cardio: null,
   sleep: null,
   food: null,
@@ -112,6 +116,9 @@ export const actions = {
   setMuscle({ commit }, muscle) {
     commit('setMuscle', muscle)
   },
+  setMuscleId({ commit }, muscleid) {
+    commit('setMuscleId', muscleid)
+  },
   setCardio({ commit }, cardio) {
     commit('setCardio', cardio)
   },
@@ -159,6 +166,9 @@ export const mutations = {
   },
   setMuscle(state, muscle) {
     state.muscle = muscle
+  },
+  setMuscleId(state, muscleid) {
+    state.muscleid = muscleid
   },
   setCardio(state, cardio) {
     state.cardio = cardio

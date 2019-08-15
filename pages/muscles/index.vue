@@ -57,6 +57,7 @@ export default {
   data() {
     return {
       muscle: [],
+      muscleedit: [],
       items: 12,
       jtems: 24,
       ktems: 4,
@@ -70,6 +71,7 @@ export default {
         this.muscle = response.data.muscles
         console.log(response.data.muscles) // eslint-disable-line
         this.$store.commit('setMuscle', response.data.muscles)
+        console.log(this.$store.state.muscle) // eslint-disable-line
         throw response.data
       }).catch((error) => {
         throw error
@@ -79,6 +81,9 @@ export default {
     editmuscle1(k) {
       console.log(this.muscle) // eslint-disable-line
       console.log(this.muscle[k]._id) // eslint-disable-line
+      const id = this.muscle[k]._id
+      this.$store.commit('setMuscleId', this.muscle[k])
+      this.$router.push('/muscles/' + id)
     },
     deletemuscle1(k) {
       const id = this.muscle[k]._id
