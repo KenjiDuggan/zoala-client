@@ -30,7 +30,7 @@
           Delete this workout
         </v-btn>
       </div>
-      <v-expansion-panel v-model="panel">
+      <v-expansion-panel v-model="panel" inset>
         <v-expansion-panel-content v-for="(item,i) in 6" :key="i" class="rounded-corner secondary">
           <template v-slot:header>
             <div class="info--text">
