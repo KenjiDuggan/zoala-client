@@ -40,7 +40,8 @@ module.exports = {
   plugins: [
     '~/plugins/axios',
     '~/plugins/vue-swal',
-    '~plugins/vue2-google-maps'
+    '~plugins/vue2-google-maps',
+    { src: '~plugins/vue-tables-2.js', ssr: false }
   ],
   /*
    ** Nuxt.js modules
@@ -99,6 +100,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
+    vendor: ['vue-tables-2'],
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({

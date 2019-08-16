@@ -34,6 +34,7 @@
     "vue-server-renderer": "^2.6.10",
     "vue-swal": "^1.0.0",
     "vue-sweetalert2": "^2.1.1",
+    "vue-tables-2": "^1.4.70",
     "vue-template-compiler": "^2.6.10",
     "vue2-frappe": "^1.0.28",
     "vue2-google-maps": "^0.10.7"
@@ -63,6 +64,7 @@
     "sass-loader": "^7.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "vue-jest": "^3.0.3"
+    "vue-jest": "^3.0.3",
+    "vuetable-2": "^1.7.5"
   }
 }
