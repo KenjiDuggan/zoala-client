@@ -1,39 +1,9 @@
 <template>
   <div>
-    <h1>Name: {{ muscle.name }}</h1>
+    <h1>Name: {{ muscleid.name }}</h1>
     <v-divider />
-    <h2>Description: {{ muscle.description }}</h2>
-    <!-- <v-simple-table class="warning">
-      <thead>
-        <tr>
-          <th class="text-left">
-            Day
-          </th>
-          <th class="text-left">
-            Body Part
-          </th>
-          <th class="text-left">
-            Exercises
-          </th>
-        </tr>
-      </thead>
-
-      <tbody class="error">
-        <div v-for="(item, i) in 6" :key="i">
-          <tr>
-            <td>{{ muscle.schedule[i].day }}</td>
-          </tr>
-          <tr>
-            <td>{{ muscle.schedule[i].bodyPart }}</td>
-          </tr>
-          <td v-for="(jtem, j) in muscle.schedule[i].workouts.length" :key="j">
-            {{ muscle.schedule[i].workouts[j] }}
-          </td>
-
-          </tr>
-        </div>
-      </tbody>
-    </v-simple-table> -->
+    <h2>Description: {{ muscleid.description }}</h2>
+    <br><br>
     <v-container>
       <v-flex>
         <v-toolbar color="secondary" dark>
@@ -65,39 +35,62 @@
               </v-tab>
             </v-tabs>
           </v-flex>
+
           <v-tabs-items v-model="tab">
             <v-card flat>
               <div v-if="currentTab === 0" v-show="currentTab === 0">
                 <v-card-text>
-                  <b>{{ item.title }}</b>
-                  <v-btn
-                    slot="activator"
-                    left
-                    class="v-btn--simple txt-xs-right"
-                    color="danger"
-                    icon
-                    @click="removeDailie(index)"
-                  >
-                    <v-icon color="error">
-                      check
-                    </v-icon>
-                  </v-btn>
-                  <v-btn
-                    slot="activator"
-                    left
-                    class="v-btn--simple"
-                    color="danger"
-                    icon
-                    @click="editDailie1()"
-                  >
-                    <v-icon color="error">
-                      edit
-                    </v-icon>
-                  </v-btn>
-                  <div v-if="editDailie">
-                    <v-flex xs12>
-                      <v-text-field v-model="dailyEdit" label="Editing Now" @keyup.enter="editDailie2(item.id)" />
-                    </v-flex>
+                  <h3>{{ muscleid.schedule[currentTab].bodyPart }}: </h3>
+                  <div v-for="j in (muscleid.schedule[currentTab].workouts.length)" :key="j">
+                    {{ muscleid.schedule[currentTab].workouts[j-1] }}
+                  </div>
+                </v-card-text>
+              </div>
+              <div v-if="currentTab === 1" v-show="currentTab === 1">
+                <v-card-text>
+                  <h3>{{ muscleid.schedule[currentTab].bodyPart }}: </h3>
+                  <div v-for="j in (muscleid.schedule[currentTab].workouts.length + 1)" :key="j">
+                    {{ muscleid.schedule[currentTab].workouts[j-1] }}
+                  </div>
+                </v-card-text>
+              </div>
+              <div v-if="currentTab === 2" v-show="currentTab === 2">
+                <v-card-text>
+                  <h3>{{ muscleid.schedule[currentTab].bodyPart }}: </h3>
+                  <div v-for="j in (muscleid.schedule[currentTab].workouts.length + 1)" :key="j">
+                    {{ muscleid.schedule[currentTab].workouts[j-1] }}
+                  </div>
+                </v-card-text>
+              </div>
+              <div v-if="currentTab === 3" v-show="currentTab === 3">
+                <v-card-text>
+                  <h3>{{ muscleid.schedule[currentTab].bodyPart }}: </h3>
+                  <div v-for="j in (muscleid.schedule[currentTab].workouts.length + 1)" :key="j">
+                    {{ muscleid.schedule[currentTab].workouts[j-1] }}
+                  </div>
+                </v-card-text>
+              </div>
+              <div v-if="currentTab === 4" v-show="currentTab === 4">
+                <v-card-text>
+                  <h3>{{ muscleid.schedule[currentTab].bodyPart }}: </h3>
+                  <div v-for="j in (muscleid.schedule[currentTab].workouts.length + 1)" :key="j">
+                    {{ muscleid.schedule[currentTab].workouts[j-1] }}
+                  </div>
+                </v-card-text>
+              </div>
+              <div v-if="currentTab === 5" v-show="currentTab === 5">
+                <v-card-text>
+                  <h3>{{ muscleid.schedule[currentTab].bodyPart }}: </h3>
+                  <div v-for="j in (muscleid.schedule[currentTab].workouts.length + 1)" :key="j">
+                    {{ muscleid.schedule[currentTab].workouts[j-1] }}
+                  </div>
+                </v-card-text>
+              </div>
+              <div v-if="currentTab === 6" v-show="currentTab === 6">
+                <v-card-text>
+                  <h3>{{ muscleid.schedule[currentTab].bodyPart }}: </h3>
+                  <div v-for="j in (muscleid.schedule[currentTab].workouts.length + 1)" :key="j">
+                    {{ muscleid.schedule[currentTab].workouts[j-1] }}
                   </div>
                 </v-card-text>
               </div>
@@ -106,16 +99,23 @@
         </material-card>
       </v-flex>
     </v-container>
-    <v-btn onclick="click">
-      wow
-    </v-btn>
+  </div>
+  </v-card>
+  </v-tabs-items>
+  </material-card>
+  </v-flex>
+  </v-container>
+
   </div>
 </template>
-<script>
 
+<script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      currentTab: 0,
+      tab: null,
       muscle: [],
       items: ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
       jtems: 24,
@@ -123,9 +123,10 @@ export default {
       length: 3
     }
   },
-  mounted() {
-    this.muscle = this.$store.getters.muscleid
-    console.log(this.muscle) // eslint-disable-line
+  computed: {
+    ...mapGetters([
+      'muscleid'
+    ])
   },
   methods: {
     click() {

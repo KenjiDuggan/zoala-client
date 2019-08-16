@@ -48,6 +48,7 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
       <br>
+      <br>
     </div>
   </div>
 </template>
