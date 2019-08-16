@@ -34,9 +34,81 @@
         </div>
       </tbody>
     </v-simple-table> -->
-    <no-ssr placeholder="Loading...">
-      <v-client-table :data="tableData" :columns="columns" />
-    </no-ssr>
+    <v-container>
+      <v-flex>
+        <v-toolbar color="secondary" dark>
+          <v-toolbar-side-icon />
+          <v-toolbar-title class="headline text-xs-center">
+            Weekly Workout
+          </v-toolbar-title>
+          <v-spacer />
+        </v-toolbar>
+        <material-card
+          class="card-tabs"
+          color="secondary"
+        >
+          <v-flex
+            slot="header"
+          >
+            <v-tabs
+              v-model="tab"
+              fixed-tabs
+            >
+              <v-tabs-slider color="amber darken-3" />
+              <v-tab
+                v-for="(item, index) in items"
+                :key="item"
+                :class="{active: currentTab === index}"
+                @click="currentTab = index"
+              >
+                {{ item }}
+              </v-tab>
+            </v-tabs>
+          </v-flex>
+          <v-tabs-items v-model="tab">
+            <v-card flat>
+              <div v-if="currentTab === 0" v-show="currentTab === 0">
+                <v-card-text>
+                  <b>{{ item.title }}</b>
+                  <v-btn
+                    slot="activator"
+                    left
+                    class="v-btn--simple txt-xs-right"
+                    color="danger"
+                    icon
+                    @click="removeDailie(index)"
+                  >
+                    <v-icon color="error">
+                      check
+                    </v-icon>
+                  </v-btn>
+                  <v-btn
+                    slot="activator"
+                    left
+                    class="v-btn--simple"
+                    color="danger"
+                    icon
+                    @click="editDailie1()"
+                  >
+                    <v-icon color="error">
+                      edit
+                    </v-icon>
+                  </v-btn>
+                  <div v-if="editDailie">
+                    <v-flex xs12>
+                      <v-text-field v-model="dailyEdit" label="Editing Now" @keyup.enter="editDailie2(item.id)" />
+                    </v-flex>
+                  </div>
+                </v-card-text>
+              </div>
+            </v-card>
+          </v-tabs-items>
+        </material-card>
+      </v-flex>
+    </v-container>
+    <v-btn onclick="click">
+      wow
+    </v-btn>
   </div>
 </template>
 <script>
@@ -44,29 +116,16 @@
 export default {
   data() {
     return {
-      muscle: '',
-      items: 12,
+      muscle: [],
+      items: ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
       jtems: 24,
       ktems: 4,
-      length: 3,
-      columns: ['days', 'bodyPart', 'schedule'],
-      tableData: [
-        { id: 1, day: 'Monday', bodyPart: this.$store.getters.muscleid.schedule[0].bodyPart, schedule: this.$store.getters.muscleid.schedule[0].workouts },
-        { id: 2, day: 'Tuesday', bodyPart: this.$store.getters.muscleid.schedule[1].bodyPart, schedule: this.$store.getters.muscleid.schedule[1].workouts },
-        { id: 3, day: 'Wednesday', bodyPart: this.$store.getters.muscleid.schedule[2].bodyPart, schedule: this.$store.getters.muscle.schedule[2].workouts },
-        { id: 4, day: 'Thursday', bodyPart: this.$store.getters.muscleid.schedule[3].bodyPart, schedule: this.$store.getters.muscle.schedule[3].workouts },
-        { id: 5, day: 'Friday', bodyPart: this.$store.getters.muscleid.schedule[4].bodyPart, schedule: this.$store.getters.muscle.schedule[4].workouts },
-        { id: 6, day: 'Saturday', bodyPart: this.$store.getters.muscleid.schedule[5].bodyPart, schedule: this.$store.getters.muscle.schedule[5].workouts },
-        { id: 7, day: 'Sunday', bodyPart: this.$store.getters.muscleid.schedule[6].bodyPart, schedule: this.$store.getters.muscle.schedule[6].workouts }
-      ],
-      options: {
-        // see the options API
-      }
+      length: 3
     }
   },
-  computed() {
-    console.log(this.muscle) // eslint-disable-line
+  mounted() {
     this.muscle = this.$store.getters.muscleid
+    console.log(this.muscle) // eslint-disable-line
   },
   methods: {
     click() {
