@@ -1,9 +1,17 @@
 <template>
   <div>
+    <nuxt-link to="/muscles">
+      <v-btn left class="ma-2 secondary info--text" dark>
+        <v-icon dark left>
+          arrow_back
+        </v-icon>Back
+      </v-btn>
+    </nuxt-link>
+    <br><br>
     <h1>Name: {{ muscleid.name }}</h1>
     <v-divider />
     <h2>Description: {{ muscleid.description }}</h2>
-    <br><br>
+    <br>
     <v-container>
       <v-flex>
         <v-toolbar color="secondary" dark>
@@ -129,9 +137,6 @@ export default {
     ])
   },
   methods: {
-    click() {
-      console.log(this.muscle) // eslint-disable-line
-    }
   },
   middleware: 'auth'
 }

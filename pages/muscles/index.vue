@@ -23,10 +23,13 @@
       <h1>{{ muscle[k].name }}</h1><v-divider />
       <h3>{{ muscle[k].description }}</h3><br>
       <div class="d-flex justify-between align-center mb-3">
-        <v-btn class="info--text accent rounded-corners" @click="editmuscle1(k)">
+        <v-btn class="info--text accent rounded-corners" @click="seemuscle(k)">
+          See this workout
+        </v-btn>
+        <v-btn class="info--text accent rounded-corners" @click="editmuscle(k)">
           Edit this workout
         </v-btn>
-        <v-btn class="info--text accent rounded-corners" @click="deletemuscle1(k)">
+        <v-btn class="info--text accent rounded-corners" @click="deletemuscle(k)">
           Delete this workout
         </v-btn>
       </div>
@@ -79,14 +82,17 @@ export default {
       })
   },
   methods: {
-    editmuscle1(k) {
-      console.log(this.muscle) // eslint-disable-line
-      console.log(this.muscle[k]._id) // eslint-disable-line
-      const id = this.muscle[k]._id
+    seemuscle(k) {
       this.$store.commit('setMuscleId', this.muscle[k])
+      const id = this.muscle[k]._id
       this.$router.push('/muscles/' + id)
     },
-    deletemuscle1(k) {
+    editmuscle(k) {
+      this.$store.commit('setMuscleId', this.muscle[k])
+      const id = this.muscle[k]._id
+      this.$router.push('/muscles/' + id + '/edit')
+    },
+    deletemuscle(k) {
       const id = this.muscle[k]._id
       this.$swal({
         title: 'Are you sure?',
