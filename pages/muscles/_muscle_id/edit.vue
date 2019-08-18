@@ -33,40 +33,18 @@
           </template>
           <v-card>
             <v-card-text>
-              <h4>{{ muscleid.schedule[i].bodyPart }}</h4>
-              <div v-for="(jtem, j) in muscleid.schedule[i].workouts.length" :key="j">
-                {{ muscleid.schedule[i].workouts[j] }}
-              </div>
+              <v-form @submit="editnow">
+                <v-textarea v-model="bodypartedit" rows="1" :label="muscleid.schedule[i].bodyPart" />
+                <v-textarea v-for="(jtem, j) in muscleid.schedule[i].workouts.length" :key="j" v-model="workoutseditPlaceholders[j]" rows="1" :label="muscleid.schedule[i].workouts[j]" />
+                <v-btn @click="submit">
+                  Edit Day
+                </v-btn>
+              </v-form>
             </v-card-text>
           </v-card>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
-    <!--
-    <v-simple-table dark>
-      <thead>
-        <tr class="primary">
-          <th class="text-left uppercase">
-            Day
-          </th>
-          <th class="text-left uppercase">
-            Body Part
-          </th>
-          <th class="text-left uppercase">
-            Workouts
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in editworkouts" :key="item.day" class="secondary info--text">
-          <td>{{ item.day }}</td>
-          <td>{{ item.bodypart }}</td>
-          <td v-for="j in 7" :key="j">
-            {{ item.workouts[j-1] }}
-          </td>
-        </tr>
-      </tbody>
-    </v-simple-table> -->
     <br>
     <v-btn class="secondary info--text">
       Save the changes
@@ -84,6 +62,8 @@ export default {
       jtems: 24,
       ktems: 4,
       length: 3,
+      bodypartedit: '',
+      workoutseditPlaceholders: ['', '', '', '', '', '', '', '', '', '', '', ''],
       editworkouts: [
         {
           day: this.$store.state.muscleid.schedule[0].day,
@@ -131,6 +111,12 @@ export default {
   methods: {
     all() {
       this.panel = [...Array(this.items).keys()].map((k, i) => i)
+    },
+    editday(k) {
+
+    },
+    editweek(k) {
+
     }
   },
   middleware: 'auth'
