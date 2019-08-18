@@ -111,12 +111,8 @@ export default {
       this.panel = [...Array(this.items).keys()].map((k, i) => i)
     },
     editday(i) {
-      console.log(this.muscleid.schedule[i].bodyPart) // eslint-disable-line
-      this.muscleid.schedule[i].bodyPart = this.bodypartedit
-
-      console.log(this.$store.state.muscleid.schedule[i].bodyPart) // eslint-disable-line
-      console.log(this.bodypartedit)  // eslint-disable-line
-      this.$store.state.muscleid.schedule[i].workouts = this.workoutseditPlaceholders
+      this.$store.commit('setMuscleId', this.muscleid)
+      vm.$recompute('muscleid')
     },
     editweek(k) {
 
